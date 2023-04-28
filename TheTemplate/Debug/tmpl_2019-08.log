@@ -1,0 +1,16 @@
+﻿  game.cpp
+X:\BUAS\TheTemplate\surface.h(53,29): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+X:\BUAS\TheTemplate\surface.h(53,23): warning C4244: 'initializing': conversion from 'float' to 'const unsigned int', possible loss of data
+  surface.cpp
+X:\BUAS\TheTemplate\surface.h(53,29): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+X:\BUAS\TheTemplate\surface.h(53,23): warning C4244: 'initializing': conversion from 'float' to 'const unsigned int', possible loss of data
+X:\BUAS\TheTemplate\surface.cpp(183,12): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+X:\BUAS\TheTemplate\surface.cpp(183,8): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+X:\BUAS\TheTemplate\surface.cpp(232,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+X:\BUAS\TheTemplate\surface.cpp(232,42): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  template.cpp
+X:\BUAS\TheTemplate\surface.h(53,29): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+X:\BUAS\TheTemplate\surface.h(53,23): warning C4244: 'initializing': conversion from 'float' to 'const unsigned int', possible loss of data
+  Generating Code...
+     Creating library X:\BUAS\TheTemplate\tmpl_2019-08_x64_debug.lib and object X:\BUAS\TheTemplate\tmpl_2019-08_x64_debug.exp
+  tmpl_2019-08.vcxproj -> X:\BUAS\TheTemplate\tmpl_2019-08_x64_debug.exe
