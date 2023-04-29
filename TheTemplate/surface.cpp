@@ -244,6 +244,53 @@ void Surface::FPlot(float x, float y, Pixel c)
 
 }
 
+void Surface::Circle(int x, int y, int r, int b, Pixel c1, Pixel c2) {
+	// I used the method I found in https://www.youtube.com/watch?v=HaZh4SVCXyg&ab_channel=SkillUpwithGenie to create my own function.
+
+	for (int i = 0; i < 2 * r; i++) {
+		for (int j = 0; j < 2 * r; j++) {
+
+			//calculate the coord of this point
+			float pX = x - r + i, pY = y - r + j;
+
+			//distance from this point to the center of the circle
+			float d = sqrtf(powf(pX - x, 2) + powf(pY - y, 2));
+
+			//check if this point is on or in the circle
+			if (d <= r && d > r - b) {
+				Plot(pX, pY, c1);
+			}
+			else if (d < r) {
+				Plot(pX, pY, c2);
+			}
+		}
+	}
+}
+
+void Surface::FCircle(float x, float y, float r, float b, Pixel c1, Pixel c2) {
+	// I used the method I found in https://www.youtube.com/watch?v=HaZh4SVCXyg&ab_channel=SkillUpwithGenie to create my own function.
+
+	for (float i = 0; i < 2 * r; i += 0.5f) {
+		for (float j = 0; j < 2 * r; j += 0.5f) {
+
+			//calculate the coord of this point
+			float pX = x - r + i, pY = y - r + j;
+
+			//distance from this point to the center of the circle
+			float d = sqrtf(powf(pX - x, 2) + powf(pY - y, 2));
+
+			//check if this point is on or in the circle
+			if (d <= r && d > r - b) {
+				FPlot(pX, pY, c1);
+			}
+			else if (d < r) {
+				Plot(pX, pY, c2);
+			}
+		}
+	}
+}
+
+
 
 
 void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )

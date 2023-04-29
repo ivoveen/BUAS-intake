@@ -2,11 +2,15 @@
 #include "surface.h"
 #include <cstdio> //printf
 #include "template.h"
+
 constexpr auto PARTICLES = 4096u;
 
 
 namespace Tmpl8
 {
+
+    
+
 
     void Game::Init()
     {
@@ -18,7 +22,8 @@ namespace Tmpl8
     void Game::Tick(float deltaTime)
     {
         screen->Clear(0);
-        screen->FLine(35,23,240,250, 0xff0000);
-        screen->Line(25, 23, 230, 250, 0xff0000);
+        screen->FCircle( 200,  200,  100, 4,  0xFFFFFF,  0xFF0000);
+        screen->Circle(420, 200, 100, 4, 0xFFFFFF, 0xFF0000);
+
     }
 };
