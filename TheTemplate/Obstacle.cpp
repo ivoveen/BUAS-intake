@@ -12,13 +12,16 @@ namespace Tmpl8
             this->x2 = x2;
             this->y2 = y2;
         }
-      
+
+        void Obstacle::Tick(float deltaTime, Surface* screen) {
+            Draw(screen);
+        }
 
         Hitbox Obstacle::GetHitbox() {
             return Hitbox(x1, y1, x2, y2);
         }
 
-        void Obstacle::draw(Surface * screen) {
+        void Obstacle::Draw(Surface * screen) {
             screen->FBox(x1, y1, x2, y2, c1);
         }
 

@@ -10,7 +10,7 @@ namespace Tmpl8
 
     }
 
-    vec2 Physics::gravity(float x, float y, float mass, float deltaTime) {
+    vec2 Physics::Gravity(float x, float y, float mass, float deltaTime) {
         vec2 Fz = vec2(0, 0);
         vec2 y0 = vec2(x, y);
         vec2 v0 = v;
@@ -23,14 +23,14 @@ namespace Tmpl8
     }
 
 
-    vec2 Physics::airResistance() {
+    vec2 Physics::AirResistance() {
         return NULL;
     }
-    vec2 Physics::bounce(vec2 F) {
+    vec2 Physics::Bounce(vec2 F) {
         F *= -1;
         return F;
     }
-    vec2 Physics::totalForce() {
+    vec2 Physics::TotalForce() {
         return NULL;
     }
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "surface.h"
 
 namespace Tmpl8
 {
@@ -14,7 +15,8 @@ namespace Tmpl8
 	
 	class GameObject
 	{
-        
+    public:
+        virtual void Tick(float deltaTime, Surface* screen);
 
 
 	};

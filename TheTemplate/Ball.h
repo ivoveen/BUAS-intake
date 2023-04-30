@@ -6,15 +6,17 @@
 namespace Tmpl8 {
 
     class Ball :
-        private Physics
+        private Physics,
+        public GameObject
     {
     public:
         float x, y, r, b, mass;
         Pixel c1, c2;
 
         Ball(float x, float y, float r, float b, float mass, Pixel c1, Pixel c2, vec2 v);
-        void move(float deltaTime, Surface* screen);
-        void draw(Surface* screen);
+        void Tick(float deltaTime, Surface* screen);
+        void Move(float deltaTime, Surface* screen);
+        void Draw(Surface* screen);
         Hitbox GetHitbox();
     };
 

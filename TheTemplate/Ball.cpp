@@ -18,14 +18,19 @@ namespace Tmpl8
         this->v = v;
     }
 
-    void Ball::move(float deltaTime, Surface* screen) {
-        vec2 force = gravity(x, y, 0, deltaTime);
-        x = force.x, y = force.y;
-
-        draw(screen);
+    void Ball::Tick(float deltaTime, Surface* screen) {
+        Move(deltaTime, screen);
+        Draw(screen);
     }
 
-    void Ball::draw(Surface* screen) {
+    void Ball::Move(float deltaTime, Surface* screen) {
+        vec2 force = Gravity(x, y, 0, deltaTime);
+        x = force.x, y = force.y;
+
+       ;
+    }
+
+    void Ball::Draw(Surface* screen) {
         screen->FCircle(x, y, r, b, c1, c2);
     }
 

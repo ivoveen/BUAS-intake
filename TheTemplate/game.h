@@ -1,4 +1,6 @@
 #pragma once
+#include<vector>
+#include "GameObject.h"
 
 namespace Tmpl8 {
 
@@ -6,6 +8,8 @@ class Surface;
 class Game
 {
 public:
+	std::vector<GameObject*> myGameObjects;
+
 	void SetTarget( Surface* surface ) { screen = surface; }
 	void Init();
 	void Shutdown();

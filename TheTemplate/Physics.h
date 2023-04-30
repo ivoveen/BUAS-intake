@@ -11,10 +11,10 @@ namespace Tmpl8 {
 		vec2 v; 
 		
 		Physics();
-		vec2 gravity(float x, float y, float mass, float deltaTime);
-		vec2 airResistance(); 
-		vec2 bounce(vec2 F);
-		vec2 totalForce();
+		vec2 Gravity(float x, float y, float mass, float deltaTime);
+		vec2 AirResistance(); 
+		vec2 Bounce(vec2 F);
+		vec2 TotalForce();
 		
 		
 	};

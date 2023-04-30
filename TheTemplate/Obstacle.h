@@ -14,8 +14,9 @@ namespace Tmpl8
         Pixel c1;
 
         Obstacle(float x1, float y1, float x2, float y2, Pixel c1);
+        void Tick(float deltaTime, Surface* screen);
         Hitbox GetHitbox();
-        void draw(Surface * screen);
+        void Draw(Surface * screen);
     };
 
 }
