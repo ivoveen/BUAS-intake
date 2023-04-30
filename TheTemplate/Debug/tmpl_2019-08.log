@@ -1,17 +1,5 @@
-﻿  surface.cpp
+﻿  game.cpp
 X:\BUAS-intake\TheTemplate\surface.h(53,29): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
 X:\BUAS-intake\TheTemplate\surface.h(53,23): warning C4244: 'initializing': conversion from 'float' to 'const unsigned int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(183,12): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(183,8): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(232,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(232,42): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(254,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(254,29): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(261,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(261,10): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(264,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(264,10): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(287,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\surface.cpp(287,10): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
      Creating library X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64_debug.lib and object X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64_debug.exp
   tmpl_2019-08.vcxproj -> X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64_debug.exe

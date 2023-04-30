@@ -267,24 +267,25 @@ void Surface::Circle(int x, int y, int r, int b, Pixel c1, Pixel c2) {
 	}
 }
 
-void Surface::FCircle(float x, float y, float r, float b, Pixel c1, Pixel c2) {
+
+void Surface::FCircle(float xCentre, float yCentre, float radius, float borderWidth, Pixel color1, Pixel color2) {
 	// I used the method I found in https://www.youtube.com/watch?v=HaZh4SVCXyg&ab_channel=SkillUpwithGenie to create my own function.
 
-	for (float i = 0; i < 2 * r; i += 0.5f) {
-		for (float j = 0; j < 2 * r; j += 0.5f) {
+	for (float x = 0; x < 2 * radius; x += 0.5f) {
+		for (float y = 0; y < 2 * radius; y += 0.5f) {
 
 			//calculate the coord of this point
-			float pX = x - r + i, pY = y - r + j;
+			float xPoint = xCentre - radius + x, yPoint = yCentre - radius + y;
 
 			//distance from this point to the center of the circle
-			float d = sqrtf(powf(pX - x, 2) + powf(pY - y, 2));
+			float d = sqrtf(powf(xPoint - xCentre, 2) + powf(yPoint - yCentre, 2));
 
 			//check if this point is on or in the circle
-			if (d <= r && d > r - b) {
-				FPlot(pX, pY, c1);
+			if (d <= radius && d > radius - borderWidth) {
+				FPlot(xPoint, yPoint, color1);
 			}
-			else if (d < r) {
-				Plot(pX, pY, c2);
+			else if (d < radius) {
+				FPlot(xPoint, yPoint, color2);
 			}
 		}
 	}
@@ -300,6 +301,16 @@ void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
 	Line( (float)x1, (float)y2, (float)x2, (float)y2, c );
 	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );
 }
+
+
+void Surface::FBox(float x1, float y1, float x2, float y2, Pixel c)
+{
+	FLine((float)x1, (float)y1, (float)x2, (float)y1, c);
+	FLine((float)x2, (float)y1, (float)x2, (float)y2, c);
+	FLine((float)x1, (float)y2, (float)x2, (float)y2, c);
+	FLine((float)x1, (float)y1, (float)x1, (float)y2, c);
+}
+
 
 void Surface::Bar( int x1, int y1, int x2, int y2, Pixel c )
 {

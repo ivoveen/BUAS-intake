@@ -83,12 +83,13 @@ public:
 	void Plot( int x, int y, Pixel c );
 	void FPlot(float x, float y, Pixel c);
 	void Circle(int x, int y, int r, int b, Pixel c1, Pixel c2);
-	void FCircle(float x, float y, float r, float b, Pixel c1, Pixel c2);
+	void FCircle(float xCentre, float yCentre, float radius, float borderWidth, Pixel color1, Pixel color2);
 	void LoadImage( char* a_File );
 	void CopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void BlendCopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void ScaleColor( unsigned int a_Scale );
 	void Box( int x1, int y1, int x2, int y2, Pixel color );
+	void FBox(float x1, float y1, float x2, float y2, Pixel color);
 	void Bar( int x1, int y1, int x2, int y2, Pixel color );
 	void Resize( Surface* a_Orig );
 private:
