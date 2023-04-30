@@ -1,26 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="surface.cpp">
       <Filter>template code</Filter>
     </ClCompile>
     <ClCompile Include="template.cpp">
       <Filter>template code</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h" />
     <ClInclude Include="surface.h">
       <Filter>template code</Filter>
     </ClInclude>
     <ClInclude Include="template.h">
       <Filter>template code</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">
       <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header files">
+      <UniqueIdentifier>{8d96350c-b6c8-45ae-98e7-0e545fabb2bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files">
+      <UniqueIdentifier>{2f34accf-fa4f-4024-9bc7-13e9358313e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
