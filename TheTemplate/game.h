@@ -8,7 +8,7 @@ class Surface;
 class Game
 {
 public:
-	std::vector<GameObject*> myGameObjects;
+	static std::vector<GameObject*> myGameObjects;
 
 	void SetTarget( Surface* surface ) { screen = surface; }
 	void Init();

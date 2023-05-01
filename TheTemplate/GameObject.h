@@ -17,7 +17,7 @@ namespace Tmpl8
 	{
     public:
         virtual void Tick(float deltaTime, Surface* screen);
-
+        virtual Hitbox GetHitbox();
 
 	};
 }

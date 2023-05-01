@@ -16,6 +16,7 @@ namespace Tmpl8 {
         Ball(float x, float y, float r, float b, float mass, Pixel c1, Pixel c2, vec2 v);
         void Tick(float deltaTime, Surface* screen);
         void Move(float deltaTime, Surface* screen);
+        bool CheckCollison();
         void Draw(Surface* screen);
         Hitbox GetHitbox();
     };
