@@ -24,7 +24,7 @@ namespace Tmpl8
     }
 
     void Ball::Move(float deltaTime, Surface* screen) {
-        vec2 force = Gravity(x, y, 0, deltaTime);
+        vec2 force = TotalForce(x, y, 0.0001f, deltaTime);
         x = force.x, y = force.y;
 
        ;
