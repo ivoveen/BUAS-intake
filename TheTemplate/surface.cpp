@@ -180,7 +180,7 @@ void Surface::Line(float x1, float y1, float x2, float y2, Pixel c)
 	for (int i = 0; i <= il; i++)
 	{
 		//*(m_Buffer + (int)x1 + (int)y1 * m_Pitch) = c;
-		Plot(x1, y1, c);
+		Plot((int)x1, (int)y1, c);
 		x1 += dx, y1 += dy;
 	}
 }
@@ -229,7 +229,7 @@ void Surface::Plot( int x, int y, Pixel c )
 
 void Surface::FPlot(float x, float y, Pixel c)
 {
-	float xDecimal = x - floor(x), yDecimal = y - floor(y);
+	float xDecimal = x - (float)floor(x), yDecimal = y - (float)floor(y);
 
 
 
@@ -251,17 +251,17 @@ void Surface::Circle(int x, int y, int r, int b, Pixel c1, Pixel c2) {
 		for (int j = 0; j < 2 * r; j++) {
 
 			//calculate the coord of this point
-			float pX = x - r + i, pY = y - r + j;
+			int pX = x - r + i, pY = y - r + j;
 
 			//distance from this point to the center of the circle
-			float d = sqrtf(powf(pX - x, 2) + powf(pY - y, 2));
+			double d = sqrt(pow(pX - x, 2) + pow(pY - y, 2));
 
 			//check if this point is on or in the circle
 			if (d <= r && d > r - b) {
-				Plot(pX, pY, c1);
+				Plot((int)pX, (int)pY, c1);
 			}
 			else if (d < r) {
-				Plot(pX, pY, c2);
+				Plot((int)pX, (int)pY, c2);
 			}
 		}
 	}

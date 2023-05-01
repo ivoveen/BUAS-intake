@@ -33,7 +33,7 @@ namespace Tmpl8
         screen->Clear(0);
 
         for (const auto &obj : myGameObjects) {
-            obj->Tick(deltaTime, screen);
+       //     obj->Tick(deltaTime, screen);
         }       
 
     }

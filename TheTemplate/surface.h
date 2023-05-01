@@ -50,7 +50,7 @@ inline Pixel InterpolateBlend(Pixel a_Color1, Pixel a_Color2, float factor)
 
 	const unsigned int r = (int)(r1 + factor * (r2 - r1)) <<16;
 	const unsigned int g = (int)(g1 + factor * (g2 - g1)) <<8;
-	const unsigned int b = (b1 + factor * (b2 - b1));
+	const unsigned int b = (int)(b1 + factor * (b2 - b1));
 
 
 	return (r + g + b);
