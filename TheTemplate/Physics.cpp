@@ -28,9 +28,9 @@ namespace Tmpl8
     
     vec2 Physics::TotalForce(float x, float y, float airResistance, float deltaTime) {
         vec2 v = Gravity(x, y, deltaTime);
-        vec2 Ftot = AirResistance(v, airResistance, deltaTime);
-        vec2 pos = vec2(x, y);
-        return v + pos;
+        v = AirResistance(v, airResistance, deltaTime);
+        
+        return v;
     }
 
     vec2 Physics::Bounce(vec2 F) {

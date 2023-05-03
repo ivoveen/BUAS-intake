@@ -16,9 +16,12 @@ namespace Tmpl8
 
     void Game::Init()
     {
-        
-        myGameObjects.push_back(new Ball(200, 500, 50, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0.2f, -1.0f)));
-        myGameObjects.push_back(new Obstacle(50, 700, 750, 710, 0xFFFFFF)); 
+        std::vector<vec2Equation> line;
+        line.push_back(vec2Equation(vec2(0, 0), vec2(700, 0)));
+
+
+        //myGameObjects.push_back(new Ball(200, 400, 50, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0.05f, -1.0f)));
+        myGameObjects.push_back(new Obstacle(50, 700, 750, 710, 0xFFFFFF, line)); 
         myGameObjects.push_back(new Ball(400, 50, 100, 4, 100, 0xFFFFFF, 0x00FF00, vec2(0.2f, 0.2f)));
        
     }

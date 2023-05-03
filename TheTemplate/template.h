@@ -99,7 +99,13 @@ public:
 	void normalize() { float r = 1.0f / length(); x *= r; y *= r; }
 	static vec2 normalize( vec2 v ) { return v.normalized(); }
 	float dot( const vec2& operand ) const { return x * operand.x + y * operand.y; }
+	//my own methods
+	vec2 clockwise() { return vec2(-y, x); }
+	vec2 counterClockwise() { return vec2(y, -x); }
+	bool operator == (vec2 operand) { if (x == operand.x && y == operand.y) { return true; } else { return false; } }
 };
+
+
 
 class vec3
 {

@@ -1,5 +1,7 @@
 #pragma once
 #include "surface.h"
+#include "template.h"
+#include <vector>
 
 namespace Tmpl8
 {
@@ -12,13 +14,28 @@ namespace Tmpl8
         }
         float x1, y1, x2, y2;
     };
+
+    struct vec2Equation {
+        vec2Equation() {
+
+        }
+        vec2Equation(vec2 position, vec2 direction) {
+            this->position = position;
+            this->direction = direction;
+        }
+        vec2 position, direction;
+    };
+
 	
 	class GameObject
 	{
     public:
         virtual void Tick(float deltaTime, Surface* screen);
         virtual Hitbox GetHitbox();
-
+        virtual std::vector<vec2Equation> GetEdgeVectors(){
+            std::vector<vec2Equation> emptyVector;
+            return emptyVector;
+        }
 	};
 }
 
