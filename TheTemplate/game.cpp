@@ -17,12 +17,17 @@ namespace Tmpl8
     void Game::Init()
     {
         std::vector<vec2Equation> line;
-        line.push_back(vec2Equation(vec2(0, 0), vec2(700, 0)));
+        line.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
+        line.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
+        line.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
+        line.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
 
 
-        //myGameObjects.push_back(new Ball(200, 400, 50, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0.05f, -1.0f)));
-        myGameObjects.push_back(new Obstacle(50, 700, 750, 710, 0xFFFFFF, line)); 
-        myGameObjects.push_back(new Ball(400, 50, 100, 4, 100, 0xFFFFFF, 0x00FF00, vec2(0.2f, 0.2f)));
+        myGameObjects.push_back(new Ball(800, 400, 50, 2, 100, 0xFFFFFF, 0x00FF00, vec2(-0.5f, 0.0f)));
+        myGameObjects.push_back(new Obstacle(150, 600, 450, 710, 0xFFFFFF, line)); 
+        myGameObjects.push_back(new Ball(200, 50, 10, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0.2f, 0.2f)));
+        myGameObjects.push_back(new Ball(400, 1000, 10, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.9f)));
+        myGameObjects.push_back(new Ball(0, 300, 10, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.0f)));
        
     }
 

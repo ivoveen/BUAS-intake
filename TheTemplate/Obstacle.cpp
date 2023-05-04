@@ -15,7 +15,7 @@ namespace Tmpl8
             this->edgeVectors = i;
 
             for (auto& edgeVector : edgeVectors) {
-                edgeVector.position = edgeVector.position + vec2(50, 700);
+                edgeVector.position = edgeVector.position + vec2(x1, y1);
             }
         }
 

@@ -18,6 +18,7 @@ namespace Tmpl8 {
         void Tick(float deltaTime, Surface* screen);
         void Move(float deltaTime, Surface* screen);
         GameObject* CheckCollison();
+        vec2 ClosestPointOnSegment(vec2 p, vec2 a, vec2 b);
         vec2 PointOfImpact(GameObject* obj, vec2 force);
         void Draw(Surface* screen);
         Hitbox GetHitbox();
