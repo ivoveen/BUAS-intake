@@ -17,9 +17,11 @@ namespace Tmpl8 {
         Ball(float x, float y, float r, float b, float mass, Pixel c1, Pixel c2, vec2 v);
         void Tick(float deltaTime, Surface* screen);
         void Move(float deltaTime, Surface* screen);
-        GameObject* CheckCollison();
-        vec2 ClosestPointOnSegment(vec2 p, vec2 a, vec2 b);
+        GameObject* CheckHitboxCollison();
         vec2 PointOfImpact(GameObject* obj, vec2 force);
+        vec2 ClosestPointOnSegment(vec2 p, vec2 a, vec2 b);
+        vec2 CornerPointOfImpact(vec2 force, vec2 closestPoint);
+        vec2 EdgePointOfImpact(vec2 force, vec2Equation closestEdgeVector);
         void Draw(Surface* screen);
         Hitbox GetHitbox();
     };
