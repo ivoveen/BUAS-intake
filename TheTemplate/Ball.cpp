@@ -28,32 +28,24 @@ namespace Tmpl8
 
     void Ball::Move(float deltaTime, Surface* screen) {
         if (stop == false) {
-            vec2 force = TotalForce(x, y, 0.0001f, deltaTime);
-            vec2 forcePos = force + vec2(x, y);
-
-            float xTemp = forcePos.x, yTemp = forcePos.y;
-
-
+            vec2 totalVelocity = TotalVelocity(x, y, 0.0001f, deltaTime);
+            vec2 nextPos = totalVelocity + vec2(x, y);
+            
             GameObject* obstacle = CheckHitboxCollison();
+            
             if (obstacle == NULL) {
-                x = xTemp, y = yTemp;
-
+                x = nextPos.x, y = nextPos.y;
             }
             else {
-                vec2 pointOfImpact = PointOfImpact(obstacle, force);
-
+                vec2 pointOfImpact = PointOfImpact(obstacle, totalVelocity);
                 if (pointOfImpact == vec2(0, 0)) {
-                    x = xTemp, y = yTemp;
-                }
-                else {
+                    x = nextPos.x, y = nextPos.y;
+                }else {
                     x = pointOfImpact.x, y = pointOfImpact.y;
                     stop = true;
                     v = vec2(0, 0);
-
                 }
-
             }
-            //delete(object);
         }
     }
 
@@ -74,11 +66,8 @@ namespace Tmpl8
                 }
             }
         }
-
         return NULL;
     }
-
-
 
     vec2 Ball::ClosestPointOnSegment(vec2 p, vec2 a, vec2 b) {
         //This function calculates the distance between a point and a line segment. I did not make this myself,
@@ -101,9 +90,7 @@ namespace Tmpl8
         return cp;
     }
 
-
-
-    vec2 Ball::PointOfImpact(GameObject* obstacle, vec2 force) {
+    vec2 Ball::PointOfImpact(GameObject* obstacle, vec2 totalVelocity) {
         std::vector<vec2Equation> edgeVectors = obstacle->GetEdgeVectors();
         bool isCorner = false;
         float shortestDistance = NULL;
@@ -128,14 +115,14 @@ namespace Tmpl8
         }
         
         if (isCorner) {
-            return CornerPointOfImpact(force, closestPoint);
+            return CornerPointOfImpact(totalVelocity, closestPoint);
         }
         else {
-            return EdgePointOfImpact(force, closestEdgeVector);
+            return EdgePointOfImpact(totalVelocity, closestEdgeVector);
         }
     }
 
-    vec2 Ball::CornerPointOfImpact(vec2 force, vec2 corner) {
+    vec2 Ball::CornerPointOfImpact(vec2 totalVelocity, vec2 corner) {
         // calculating the amount of deltatime elapsed until impact.
         // x(t) = x0 + fX * t
         // y(t) = y0 + fY * t
@@ -144,8 +131,8 @@ namespace Tmpl8
         // substitute x(t) and y(t) and solve for t
         // to solve this equation I used chatGPT4 to save time
         float xCircleCenter = x, yCircleCenter = y;
-        float a = powf(force.x, 2) + powf(force.y, 2);
-        float b = 2 * (xCircleCenter * force.x - corner.x * force.x + yCircleCenter * force.y - corner.y * force.y);
+        float a = powf(totalVelocity.x, 2) + powf(totalVelocity.y, 2);
+        float b = 2 * (xCircleCenter * totalVelocity.x - corner.x * totalVelocity.x + yCircleCenter * totalVelocity.y - corner.y * totalVelocity.y);
         float c = powf(xCircleCenter, 2) - 2 * xCircleCenter * corner.x + powf(corner.x, 2) + powf(yCircleCenter, 2) - 2 * yCircleCenter * corner.y + powf(corner.y, 2) - powf(r, 2);
         float d = powf(b, 2) - 4 * a * c;
         if (d < 0) {
@@ -165,12 +152,12 @@ namespace Tmpl8
         else {
             return vec2(0, 0);
         }
-        vec2 impactCircleCenter = vec2(xCircleCenter, yCircleCenter) + force * dT; //the position of the center of the circle at the time of impact.
-        vec2 cornerPointOfImpact = impactCircleCenter + force.normalized() * r; //the position of the point of impact 
-        vec2 circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + force.normalized() * r; //the position of the point of impact before the impact happened.
+        vec2 impactCircleCenter = vec2(xCircleCenter, yCircleCenter) + totalVelocity * dT; //the position of the center of the circle at the time of impact.
+        vec2 cornerPointOfImpact = impactCircleCenter + totalVelocity.normalized() * r; //the position of the point of impact 
+        vec2 circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + totalVelocity.normalized() * r; //the position of the point of impact before the impact happened.
         
-        //check if the collision point on the line is within reach of the force of the ball.
-        if (force.length() > sqrtf(powf(circleCollisionPoint.x - cornerPointOfImpact.x, 2) + powf(circleCollisionPoint.y - cornerPointOfImpact.y, 2))) {
+        //check if the collision point on the line is within reach of the totalVelocity of the ball.
+        if (totalVelocity.length() > sqrtf(powf(circleCollisionPoint.x - cornerPointOfImpact.x, 2) + powf(circleCollisionPoint.y - cornerPointOfImpact.y, 2))) {
             return impactCircleCenter;
         }
         else {
@@ -178,8 +165,8 @@ namespace Tmpl8
         }
     }
 
-    vec2 Ball::EdgePointOfImpact(vec2 force, vec2Equation closestEdgeVector) {
-        float nLine, nForce;
+    vec2 Ball::EdgePointOfImpact(vec2 totalVelocity, vec2Equation closestEdgeVector) {
+        float nLine, nTotalVelocity;
         float XLinePos = closestEdgeVector.position.x, YLinePos = closestEdgeVector.position.y;
         float xCircleCenter = x, yCircleCenter = y; 
         vec2 circleCollisionPoint; //the point of the circle that will hit the edge first.
@@ -189,12 +176,12 @@ namespace Tmpl8
         circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + obstacleEdge.clockwise().normalized() * r;
         
         //calculate the intersection between the line and the movement of the circleCollisionPoint.
-        nLine = (circleCollisionPoint.y * force.x + XLinePos * force.y - circleCollisionPoint.x * force.y - YLinePos * force.x) / (obstacleEdge.y * force.x - obstacleEdge.x * force.y);
-        nForce = (YLinePos * obstacleEdge.x + circleCollisionPoint.x * obstacleEdge.y - XLinePos * obstacleEdge.y - circleCollisionPoint.y * obstacleEdge.x) / (force.y * obstacleEdge.x - force.x * obstacleEdge.y);
-        lineCollisionPoint = circleCollisionPoint + force * nForce;
+        nLine = (circleCollisionPoint.y * totalVelocity.x + XLinePos * totalVelocity.y - circleCollisionPoint.x * totalVelocity.y - YLinePos * totalVelocity.x) / (obstacleEdge.y * totalVelocity.x - obstacleEdge.x * totalVelocity.y);
+        nTotalVelocity = (YLinePos * obstacleEdge.x + circleCollisionPoint.x * obstacleEdge.y - XLinePos * obstacleEdge.y - circleCollisionPoint.y * obstacleEdge.x) / (totalVelocity.y * obstacleEdge.x - totalVelocity.x * obstacleEdge.y);
+        lineCollisionPoint = circleCollisionPoint + totalVelocity * nTotalVelocity;
 
         //check if this intersection is actually on the edge, and within reach of the velocity.
-        if (nForce < 1 && nLine < 1 && nLine > 0) {
+        if (nTotalVelocity < 1 && nLine < 1 && nLine > 0) {
             return lineCollisionPoint + obstacleEdge.counterClockwise().normalized() * r;
         }
         else {

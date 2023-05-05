@@ -1,5 +1,5 @@
 ﻿  Ball.cpp
-X:\BUAS-intake\TheTemplate\Ball.cpp(154,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-X:\BUAS-intake\TheTemplate\Ball.cpp(155,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+X:\BUAS-intake\TheTemplate\Ball.cpp(141,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+X:\BUAS-intake\TheTemplate\Ball.cpp(142,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
      Creating library X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64_debug.lib and object X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64_debug.exp
   tmpl_2019-08.vcxproj -> X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64_debug.exe

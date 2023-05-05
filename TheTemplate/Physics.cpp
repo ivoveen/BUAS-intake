@@ -26,11 +26,11 @@ namespace Tmpl8
         return Ftot;
     }
     
-    vec2 Physics::TotalForce(float x, float y, float airResistance, float deltaTime) {
-        vec2 v = Gravity(x, y, deltaTime);
-        v = AirResistance(v, airResistance, deltaTime);
+    vec2 Physics::TotalVelocity(float x, float y, float airResistance, float deltaTime) {
+        vec2 totalVelocity = Gravity(x, y, deltaTime);
+        totalVelocity = AirResistance(totalVelocity, airResistance, deltaTime);
         
-        return v;
+        return totalVelocity;
     }
 
     vec2 Physics::Bounce(vec2 F) {
