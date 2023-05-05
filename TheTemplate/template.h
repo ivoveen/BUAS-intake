@@ -103,6 +103,8 @@ public:
 	vec2 clockwise() { return vec2(-y, x); }
 	vec2 counterClockwise() { return vec2(y, -x); }
 	bool operator == (vec2 operand) { if (x == operand.x && y == operand.y) { return true; } else { return false; } }
+	bool operator != (vec2 operand) { if (x != operand.x && y != operand.y) { return true; } else { return false; } }
+
 };
 
 

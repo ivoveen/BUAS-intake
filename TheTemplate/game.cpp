@@ -33,11 +33,16 @@ namespace Tmpl8
 
        // myGameObjects.push_back(new Obstacle(10, 10, 790, 790, 0xFFFFFF, box));
 
-        //myGameObjects.push_back(new Ball(300, 380, 20, 2, 100, 0xFFFFFF, 0x00FF00, vec2(-0.5f, 0.0f)));
-        myGameObjects.push_back(new Obstacle(150, 600, 450, 710, 0xFFFFFF, box2)); 
-        myGameObjects.push_back(new Ball(460, 300, 30, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0, 0)));
-        //myGameObjects.push_back(new Ball(400, 200, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.8f, -0.9f)));
-        //myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f)));
+        //myGameObjects.push_back(new Ball(800, 380, 20, 2, 100, 0xFFFFFF, 0x00FF00, vec2(-0.5f, 0.0f)));
+        myGameObjects.push_back(new Obstacle(450, 500, 0xFFFFFF, box2)); 
+        myGameObjects.push_back(new Obstacle(85, 500, 0xFFFFFF, box2));
+        myGameObjects.push_back(new Obstacle(150, 600, 0xFFFFFF, box2));
+        myGameObjects.push_back(new Obstacle(600, 300, 0xFFFFFF, box2));
+        myGameObjects.push_back(new Obstacle(600, 400, 0xFFFFFF, box2));
+        
+        myGameObjects.push_back(new Ball(400, 400, 30, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0, 0)));
+       // myGameObjects.push_back(new Ball(400, 800, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.6f)));
+       // myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f)));
        
     }
 

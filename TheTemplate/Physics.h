@@ -12,7 +12,7 @@ namespace Tmpl8 {
 		
 		Physics();
 		vec2 Gravity(float x, float y, float deltaTime);
-		vec2 AirResistance(vec2 F, float airResistance, float deltaTime);
+		vec2 Resistance(vec2 F, float airResistance, float deltaTime);
 		vec2 TotalDisplacement(float x, float y, float airResistance, float deltaTime);
 		vec2 Bounce(vec2 pointOfImpact, vec2 circleCenter, float elapsedDeltaTime, float totalDeltaTime);
 	

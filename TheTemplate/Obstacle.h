@@ -11,14 +11,16 @@ namespace Tmpl8
     {
     private:
     std::vector<vec2Equation> edgeVectors; 
-    
+    BoundingBox myBoundingBox;
+    float boundingBoxBuffer;
+
     public:
-        float x1, y1, x2, y2;
+        float x, y;
         Pixel c1;
 
-        Obstacle(float x1, float y1, float x2, float y2, Pixel c1, std::vector<vec2Equation>& i);
+        Obstacle(float x, float y, Pixel c1, std::vector<vec2Equation>& i);
         void Tick(float deltaTime, Surface* screen);
-        Hitbox GetHitbox();
+        BoundingBox GetBoundingBox();
         std::vector<vec2Equation> GetEdgeVectors();
         void Draw(Surface * screen);
 

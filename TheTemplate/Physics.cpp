@@ -18,25 +18,25 @@ namespace Tmpl8
 
         v = v0 + a * deltaTime;
         Fz = v * deltaTime + a * 0.5f * powf(deltaTime, 2);
-        std::cout << "Fz: " << Fz.x << ", " << Fz.y << "\n";
+        //std::cout << "Fz: " << Fz.x << ", " << Fz.y << "\n";
         return Fz;
         
     }
 
 
-    vec2 Physics::AirResistance(vec2 F, float airResistance, float deltaTime) {
+    vec2 Physics::Resistance(vec2 F, float resistance, float deltaTime) {
         if (F == vec2(0, 0)) {
             return F;
         }
-        vec2 Ftot = F - (F.normalized() * airResistance * deltaTime);
+        vec2 Ftot = F - (F.normalized() * resistance * deltaTime);
         return Ftot;
     }
     
     vec2 Physics::TotalDisplacement(float x, float y, float airResistance, float deltaTime) {
-        v = AirResistance(v, airResistance, deltaTime); 
+        v = Resistance(v, airResistance, deltaTime); 
         vec2 displacement = Gravity(x, y, deltaTime);
         
-        std::cout << "v: " << v.x << ", " << v.y << "\n";
+        //std::cout << "v: " << v.x << ", " << v.y << "\n";
         return displacement;
     }
 
@@ -48,7 +48,9 @@ namespace Tmpl8
         n = n.normalized();
         vec2 d = v * -1;
         vec2 r = n * d.dot(n) * 2 - d;
-        v = r;
+        
+        v = Resistance(r, 0.0002f, (totalDeltaTime - elapsedDeltaTime));
+
         return v * (totalDeltaTime - elapsedDeltaTime);
     }
     

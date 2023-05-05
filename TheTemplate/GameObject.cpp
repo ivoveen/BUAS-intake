@@ -9,8 +9,8 @@ namespace Tmpl8
 
 	}
 
-	Hitbox GameObject::GetHitbox() {
-		return Hitbox(0, 0, 0, 0);;
+	BoundingBox GameObject::GetBoundingBox() {
+		return BoundingBox(0, 0, 0, 0);;
 	}
 
 }

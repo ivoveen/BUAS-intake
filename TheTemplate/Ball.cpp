@@ -27,43 +27,43 @@ namespace Tmpl8
     }
 
     void Ball::Move(float deltaTime, Surface* screen) {
-
+        bool noBounce = true;
         vec2 displacement = TotalDisplacement(x, y, 0.0001f, deltaTime);
-        vec2 nextPos = displacement + vec2(x, y);
-        GameObject* obstacle = CheckHitboxCollison();
-        if (obstacle == NULL) {
-            x = nextPos.x, y = nextPos.y;
-        }
-        else {
-            Impact impact = PointOfImpact(obstacle, displacement);
-            if (impact.pointOfImpact == vec2(0, 0)) {
-                x = nextPos.x, y = nextPos.y;
-            }
-            else {
+        std::vector<GameObject*> collidingBoundingBoxes = CheckBoundingBoxCollison();
+        for (const auto& boundingBox : collidingBoundingBoxes)
+        {
+            Impact impact = PointOfImpact(boundingBox, displacement);
+            if (impact.pointOfImpact != vec2(0, 0)) {
                 vec2 bounceVelocity = Bounce(impact.pointOfImpact, impact.circleCenter, impact.elapsedDeltaTime, deltaTime);
                 x = bounceVelocity.x + x, y = bounceVelocity.y + y;
-
+                noBounce = false;
             }
         }
-
+        if (noBounce) {
+            vec2 nextPos = displacement + vec2(x, y);
+            x = nextPos.x, y = nextPos.y;
+        }
     }
-    
 
-    GameObject* Ball::CheckHitboxCollison() {
+
+    std::vector<GameObject*> Ball::CheckBoundingBoxCollison() {
+        std::vector<GameObject*> collidingBoundingBoxes;
+
         for (const auto& obj : Game::myGameObjects)
         {
-            Hitbox myHitbox = GetHitbox();
-            Hitbox checkHitbox = obj->GetHitbox();
-            //check if the checkHitbox isn't your own Hitbox
-            if (myHitbox.x1 != checkHitbox.x1 && myHitbox.y1 != checkHitbox.y1 && myHitbox.x2 != checkHitbox.x2 && myHitbox.y2 != checkHitbox.y2) {
-                // do the hitboxes collide?
-                if (myHitbox.x1 <= checkHitbox.x2 && myHitbox.x2 >= checkHitbox.x1 && myHitbox.y1 <= checkHitbox.y2 && myHitbox.y2 >= checkHitbox.y1) {
+            BoundingBox myBoundingBox = GetBoundingBox();
+            BoundingBox checkBoundingBox = obj->GetBoundingBox();
+            //check if the checkBoundingBox isn't your own BoundingBox
+            if (myBoundingBox.x1 != checkBoundingBox.x1 && myBoundingBox.y1 != checkBoundingBox.y1 && myBoundingBox.x2 != checkBoundingBox.x2 && myBoundingBox.y2 != checkBoundingBox.y2) {
+                // do the BounidngBoxes collide?
+                if (myBoundingBox.x1 <= checkBoundingBox.x2 && myBoundingBox.x2 >= checkBoundingBox.x1 && myBoundingBox.y1 <= checkBoundingBox.y2 && myBoundingBox.y2 >= checkBoundingBox.y1) {
                     //yes there is a collision
-                    return obj;
+                    //return obj;
+                    collidingBoundingBoxes.push_back(obj);
                 }
             }
         }
-        return NULL;
+        return collidingBoundingBoxes;
     }
 
     Ball::Impact Ball::PointOfImpact(GameObject* obstacle, vec2 displacement) {
@@ -89,7 +89,7 @@ namespace Tmpl8
                 closestPoint = cp;
             }
         }
-        
+
         if (isCorner) {
             return CornerPointOfImpact(displacement, closestPoint);
         }
@@ -153,7 +153,7 @@ namespace Tmpl8
         vec2 impactCircleCenter = vec2(xCircleCenter, yCircleCenter) + displacement * dT; //the position of the center of the circle at the time of impact.
         vec2 cornerPointOfImpact = corner - impactCircleCenter; //the position of the point of impact 
         vec2 circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + cornerPointOfImpact; //the position of the point of impact before the impact happened.
-        
+
         //check if the collision point on the line is within reach of the totalVelocity of the ball.
         // sqrtf(powf(circleCollisionPoint.x - cornerPointOfImpact.x, 2) + powf(circleCollisionPoint.y - cornerPointOfImpact.y, 2))
         if (displacement.length() > (circleCollisionPoint - corner).length()) {
@@ -167,13 +167,13 @@ namespace Tmpl8
     Ball::Impact Ball::EdgePointOfImpact(vec2 displacement, vec2Equation closestEdgeVector) {
         float nLine, nDisplacement;
         float XLinePos = closestEdgeVector.position.x, YLinePos = closestEdgeVector.position.y;
-        float xCircleCenter = x, yCircleCenter = y; 
+        float xCircleCenter = x, yCircleCenter = y;
         vec2 circleCollisionPoint; //the point of the circle that will hit the edge first.
         vec2 obstacleEdge = closestEdgeVector.direction;
         vec2 edgePointOfImpact; //the point the actual hit takes place.
 
         circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + obstacleEdge.clockwise().normalized() * r;
-        
+
         //calculate the intersection between the line and the movement of the circleCollisionPoint.
         nLine = (circleCollisionPoint.y * displacement.x + XLinePos * displacement.y - circleCollisionPoint.x * displacement.y - YLinePos * displacement.x) / (obstacleEdge.y * displacement.x - obstacleEdge.x * displacement.y);
         nDisplacement = (YLinePos * obstacleEdge.x + circleCollisionPoint.x * obstacleEdge.y - XLinePos * obstacleEdge.y - circleCollisionPoint.y * obstacleEdge.x) / (displacement.y * obstacleEdge.x - displacement.x * obstacleEdge.y);
@@ -189,8 +189,8 @@ namespace Tmpl8
         }
     }
 
-    Hitbox Ball::GetHitbox() {
-        return Hitbox(x - r, y - r, x + r, y + r);
+    BoundingBox Ball::GetBoundingBox() {
+        return BoundingBox(x - r, y - r, x + r, y + r);
     }
 
     void Ball::Draw(Surface* screen) {
