@@ -24,11 +24,15 @@ namespace Tmpl8
         }
 
         void Obstacle::Draw(Surface* screen) {
-            screen->FBox(x1, y1, x2, y2, c1);
+            //screen->FBox(x1, y1, x2, y2, c1);
+            for (const auto& edgeVector : edgeVectors) {
+                screen->Line(edgeVector.position.x, edgeVector.position.y, edgeVector.direction.x + edgeVector.position.x, edgeVector.direction.y + edgeVector.position.y, c1);
+
+            }
         }
 
         Hitbox Obstacle::GetHitbox() {
-            return Hitbox(x1, y1, x2, y2);
+            return Hitbox(x1, y1-100, x2, y2);
         }
 
         std::vector<vec2Equation> Obstacle::GetEdgeVectors() {

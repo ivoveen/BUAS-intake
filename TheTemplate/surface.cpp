@@ -230,18 +230,12 @@ void Surface::Plot( int x, int y, Pixel c )
 void Surface::FPlot(float x, float y, Pixel c)
 {
 	float xDecimal = x - (float)floor(x), yDecimal = y - (float)floor(y);
-
-
-
 	if ((x >= 0) && (y >= 0) && (x < m_Width) && (y < m_Height)) {
-
 		m_Buffer[(int)x + (int)y * m_Pitch] = InterpolateBlend(m_Buffer[(int)x + (int)y * m_Pitch], c, ( (1 - xDecimal) * (1 - yDecimal) ));
 		m_Buffer[(int)x + 1 + (int)y * m_Pitch] = InterpolateBlend(m_Buffer[(int)x + 1 + (int)y * m_Pitch],c, ((xDecimal) * (1 - yDecimal)) );
 		m_Buffer[(int)x + ( (int)y + 1) * m_Pitch] = InterpolateBlend(m_Buffer[(int)x + ((int)y + 1) * m_Pitch],c, ((1 - xDecimal) * (yDecimal)) );
 		m_Buffer[(int)x + 1 + ( (int)y + 1) * m_Pitch] = InterpolateBlend(m_Buffer[(int)x + 1 + ((int)y + 1) * m_Pitch], c, ((xDecimal) * (yDecimal)) );
-
 	}
-
 }
 
 void Surface::Circle(int x, int y, int r, int b, Pixel c1, Pixel c2) {
@@ -270,16 +264,12 @@ void Surface::Circle(int x, int y, int r, int b, Pixel c1, Pixel c2) {
 
 void Surface::FCircle(float xCentre, float yCentre, float radius, float borderWidth, Pixel color1, Pixel color2) {
 	// I used the method I found in https://www.youtube.com/watch?v=HaZh4SVCXyg&ab_channel=SkillUpwithGenie to create my own function.
-
 	for (float x = 0; x < 2 * radius; x += 0.5f) {
 		for (float y = 0; y < 2 * radius; y += 0.5f) {
-
 			//calculate the coord of this point
 			float xPoint = xCentre - radius + x, yPoint = yCentre - radius + y;
-
 			//distance from this point to the center of the circle
 			float d = sqrtf(powf(xPoint - xCentre, 2) + powf(yPoint - yCentre, 2));
-
 			//check if this point is on or in the circle
 			if (d <= radius && d > radius - borderWidth) {
 				FPlot(xPoint, yPoint, color1);

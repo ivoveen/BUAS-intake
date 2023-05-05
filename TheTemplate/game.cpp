@@ -17,17 +17,27 @@ namespace Tmpl8
     void Game::Init()
     {
         std::vector<vec2Equation> box;
-        box.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
-        box.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
-        box.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
-        box.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
+        box.push_back(vec2Equation(vec2(780, 0), vec2(-780, 0)));
+        box.push_back(vec2Equation(vec2(0, 0), vec2(0, 780)));
+        box.push_back(vec2Equation(vec2(0, 780), vec2(390, -300)));
+        box.push_back(vec2Equation(vec2(390, 480), vec2(780, 300)));
+        box.push_back(vec2Equation(vec2(780, 780), vec2(0, -780)));
+
+        std::vector<vec2Equation> box2;
+        box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
+        box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
+        box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
+        box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
 
 
-        myGameObjects.push_back(new Ball(800, 400, 20, 2, 100, 0xFFFFFF, 0x00FF00, vec2(-0.5f, 0.0f)));
-        myGameObjects.push_back(new Obstacle(150, 600, 450, 710, 0xFFFFFF, box)); 
-        myGameObjects.push_back(new Ball(200, 50, 20, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0.2f, 0.2f)));
-        myGameObjects.push_back(new Ball(400, 1000, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.9f)));
-        myGameObjects.push_back(new Ball(0, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.0f)));
+
+       // myGameObjects.push_back(new Obstacle(10, 10, 790, 790, 0xFFFFFF, box));
+
+        //myGameObjects.push_back(new Ball(300, 380, 20, 2, 100, 0xFFFFFF, 0x00FF00, vec2(-0.5f, 0.0f)));
+        myGameObjects.push_back(new Obstacle(150, 600, 450, 710, 0xFFFFFF, box2)); 
+        myGameObjects.push_back(new Ball(460, 300, 30, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0, 0)));
+        //myGameObjects.push_back(new Ball(400, 200, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.8f, -0.9f)));
+        //myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f)));
        
     }
 

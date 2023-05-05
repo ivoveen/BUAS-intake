@@ -9,6 +9,18 @@ namespace Tmpl8 {
         private Physics,
         public GameObject
     {
+    private:
+        struct Impact
+        {
+            Impact(vec2 pointOfImpact, vec2 circleCenter, float elapsedDeltaTime) {
+                this->pointOfImpact = pointOfImpact;
+                this->circleCenter = circleCenter;
+                this->elapsedDeltaTime = elapsedDeltaTime;
+            }
+            vec2 pointOfImpact;
+            vec2 circleCenter;
+            float elapsedDeltaTime;
+        };
     public:
         float x, y, r, b, mass;
         Pixel c1, c2;
@@ -18,10 +30,10 @@ namespace Tmpl8 {
         void Tick(float deltaTime, Surface* screen);
         void Move(float deltaTime, Surface* screen);
         GameObject* CheckHitboxCollison();
-        vec2 PointOfImpact(GameObject* obj, vec2 force);
+        Impact PointOfImpact(GameObject* obj, vec2 force);
         vec2 ClosestPointOnSegment(vec2 p, vec2 a, vec2 b);
-        vec2 CornerPointOfImpact(vec2 force, vec2 closestPoint);
-        vec2 EdgePointOfImpact(vec2 force, vec2Equation closestEdgeVector);
+        Impact CornerPointOfImpact(vec2 force, vec2 closestPoint);
+        Impact EdgePointOfImpact(vec2 force, vec2Equation closestEdgeVector);
         void Draw(Surface* screen);
         Hitbox GetHitbox();
     };
