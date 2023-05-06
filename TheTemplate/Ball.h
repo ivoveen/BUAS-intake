@@ -21,12 +21,14 @@ namespace Tmpl8 {
             vec2 circleCenter;
             float elapsedDeltaTime;
         };
-    public:
+
+        Surface* sprite;
+        Sprite ballSprite;
         float x, y, r, b, mass;
         Pixel c1, c2;
         bool stop;
-
-        Ball(float x, float y, float r, float b, float mass, Pixel c1, Pixel c2, vec2 v);
+    public:
+        Ball(float x, float y, Surface* ballSprite, vec2 v);
         void Tick(float deltaTime, Surface* screen);
         void Move(float deltaTime, Surface* screen);
         std::vector<GameObject*> CheckBoundingBoxCollison();

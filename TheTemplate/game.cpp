@@ -12,45 +12,52 @@ constexpr auto PARTICLES = 4096u;
 namespace Tmpl8
 {
    std::vector<GameObject*> Game::myGameObjects;
+   Surface* ballSprite = new Surface("assets/ball.png");
+
+   void Game::Init()
+   {
+       
 
 
-    void Game::Init()
-    {
-        std::vector<vec2Equation> box;
-        box.push_back(vec2Equation(vec2(780, 0), vec2(-780, 0)));
-        box.push_back(vec2Equation(vec2(0, 0), vec2(0, 780)));
-        box.push_back(vec2Equation(vec2(0, 780), vec2(390, -300)));
-        box.push_back(vec2Equation(vec2(390, 480), vec2(780, 300)));
-        box.push_back(vec2Equation(vec2(780, 780), vec2(0, -780)));
+       std::vector<vec2Equation> box;
+       box.push_back(vec2Equation(vec2(780, 0), vec2(-780, 0)));
+       box.push_back(vec2Equation(vec2(0, 0), vec2(0, 780)));
+       box.push_back(vec2Equation(vec2(0, 780), vec2(390, -300)));
+       box.push_back(vec2Equation(vec2(390, 480), vec2(780, 300)));
+       box.push_back(vec2Equation(vec2(780, 780), vec2(0, -780)));
 
-        std::vector<vec2Equation> box2;
-        box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
-        box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
-        box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
-        box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
-
+       std::vector<vec2Equation> box2;
+       box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
+       box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
+       box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
+       box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
 
 
        // myGameObjects.push_back(new Obstacle(10, 10, 790, 790, 0xFFFFFF, box));
 
         //myGameObjects.push_back(new Ball(800, 380, 20, 2, 100, 0xFFFFFF, 0x00FF00, vec2(-0.5f, 0.0f)));
-        myGameObjects.push_back(new Obstacle(450, 500, 0xFFFFFF, box2)); 
-        myGameObjects.push_back(new Obstacle(85, 500, 0xFFFFFF, box2));
+       // myGameObjects.push_back(new Obstacle(450, 500, 0xFFFFFF, box2)); 
+       //myGameObjects.push_back(new Obstacle(85, 500, 0xFFFFFF, box2));
         myGameObjects.push_back(new Obstacle(150, 600, 0xFFFFFF, box2));
-        myGameObjects.push_back(new Obstacle(600, 300, 0xFFFFFF, box2));
-        myGameObjects.push_back(new Obstacle(600, 400, 0xFFFFFF, box2));
+        //myGameObjects.push_back(new Obstacle(600, 300, 0xFFFFFF, box2));
+        //myGameObjects.push_back(new Obstacle(600, 400, 0xFFFFFF, box2));
+       
         
-        myGameObjects.push_back(new Ball(400, 400, 30, 2, 100, 0xFFFFFF, 0x00FF00, vec2(0, 0)));
+        myGameObjects.push_back(new Ball(300, 400, ballSprite, vec2(0, 0)));
        // myGameObjects.push_back(new Ball(400, 800, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.6f)));
        // myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f)));
        
     }
 
-    void Game::Shutdown() {}
+    void Game::Shutdown() {
+       
+    }
+    //Sprite theSprite(new Surface("assets/ball.png"), 1);
 
     void Game::Tick(float deltaTime)
     {
         screen->Clear(0);
+        //ballSprite.Draw(screen, 0, 0);
 
         for (const auto &obj : myGameObjects) {
             obj->Tick(deltaTime, screen);

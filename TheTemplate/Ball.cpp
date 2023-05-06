@@ -9,16 +9,15 @@
 
 namespace Tmpl8
 {
-    Ball::Ball(float x, float y, float r, float b, float mass, Pixel c1, Pixel c2, vec2 v) {
+    Ball::Ball(float x, float y, Surface* sprite,vec2 v) : ballSprite(sprite, 1) {
         this->x = x;
         this->y = y;
-        this->r = r;
-        this->b = b;
-        this->mass = mass;
-        this->c1 = c1;
-        this->c2 = c2;
         this->v = v;
+        this->sprite = sprite;
+        
+        r = 49;
         stop = false;
+        
     }
 
     void Ball::Tick(float deltaTime, Surface* screen) {
@@ -194,7 +193,7 @@ namespace Tmpl8
     }
 
     void Ball::Draw(Surface* screen) {
-        screen->FCircle(x, y, r, b, c1, c2);
+        ballSprite.Draw(screen, x, y);
     }
 
 

@@ -123,6 +123,7 @@ public:
 	};
 	
 	// Structors
+	Sprite();
 	Sprite( Surface* a_Surface, unsigned int a_NumFrames );
 	~Sprite();
 	// Methods

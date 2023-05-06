@@ -449,6 +449,9 @@ void Surface::ScaleColor( unsigned int a_Scale )
 	}
 }
 
+
+Sprite::Sprite() {}
+
 Sprite::Sprite( Surface* a_Surface, unsigned int a_NumFrames ) :
 	m_Width( static_cast<int>(a_Surface->GetWidth() / a_NumFrames) ),
 	m_Height( a_Surface->GetHeight() ),
