@@ -50,6 +50,10 @@ namespace Tmpl8
             return edgeVectors;
         }
 
+        void Obstacle::SetEdgeVectors(std::vector<vec2Equation> newEdgeVectors) {
+            edgeVectors = newEdgeVectors;
+        }
+
 
    
 }

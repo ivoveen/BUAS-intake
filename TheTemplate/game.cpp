@@ -4,6 +4,7 @@
 #include "template.h"
 #include "Ball.h"
 #include "Obstacle.h"
+#include "Flipper.h"
 #include <vector>
 #include <windows.h>
 constexpr auto PARTICLES = 4096u;
@@ -84,10 +85,23 @@ namespace Tmpl8
        topRightWall.push_back(vec2Equation(vec2(-150, -75), vec2(-100, -50)));
        //bottomRightWall.push_back(vec2Equation(vec2(-173, 97), vec2(0, -50)));
 
+       std::vector<vec2Equation> leftFlipper;
+       leftFlipper.push_back(vec2Equation(vec2(0, 25), vec2(0, -25))); 
+       leftFlipper.push_back(vec2Equation(vec2(0, 0), vec2(150, 0)));
+       leftFlipper.push_back(vec2Equation(vec2(150, 0), vec2(0, 25)));
+       leftFlipper.push_back(vec2Equation(vec2(150, 25), vec2(-150, 0)));
+       
+       std::vector<vec2Equation> rightFlipper;
+       rightFlipper.push_back(vec2Equation(vec2(0, 0), vec2(0, -25)));
+       rightFlipper.push_back(vec2Equation(vec2(0, -25), vec2(-150, 0)));
+       rightFlipper.push_back(vec2Equation(vec2(-150, -25), vec2(0, 25)));
+       rightFlipper.push_back(vec2Equation(vec2(-150, 0), vec2(150, 0)));
 
-        //myGameObjects.push_back(new Obstacle(1, 1, 0xFFFFFF, box));
-        //myGameObjects.push_back(new Obstacle(10, 700, 0xFFFFFF, catcher));
-        myGameObjects.push_back(new Ball(760, 600, ballSprite, vec2(0.0f, -1.5f)));       
+
+        myGameObjects.push_back(new Flipper(213, 650, 0xFF00FF, leftFlipper, VK_LEFT));
+        myGameObjects.push_back(new Flipper(523, 650, 0xFF00FF, rightFlipper, VK_RIGHT));
+        
+        myGameObjects.push_back(new Ball(760, 600, ballSprite, vec2(0.0f, -1.2f)));       
 
         myGameObjects.push_back(new Obstacle(708, 60, 0xFFFFFF, tubeInnerWallS1));
         myGameObjects.push_back(new Obstacle(108, 60, 0xFFFFFF, tubeInnerWallS2));
@@ -104,6 +118,7 @@ namespace Tmpl8
         myGameObjects.push_back(new Obstacle(734, 329, 0xFFFFFF, topRightWall));
         //myGameObjects.push_back(new Obstacle(578, 10, 0xFFFFFF, tubeOuterwallS1));
 
+        
 
        // myGameObjects.push_back(new Ball(200, 400, ballSprite, vec2(0, 0)));
        // myGameObjects.push_back(new Ball(400, 800, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.6f)));

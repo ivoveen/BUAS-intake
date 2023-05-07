@@ -22,6 +22,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>CPP files</Filter>
     </ClCompile>
+    <ClCompile Include="Flipper.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -43,6 +46,9 @@
       <Filter>header files</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Flipper.h">
       <Filter>header files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,11 +17,11 @@ namespace Tmpl8
     public:
         float x, y;
         Pixel c1;
-
         Obstacle(float x, float y, Pixel c1, std::vector<vec2Equation>& i);
-        void Tick(float deltaTime, Surface* screen);
+        virtual void Tick(float deltaTime, Surface* screen);
         BoundingBox GetBoundingBox();
         std::vector<vec2Equation> GetEdgeVectors();
+        void SetEdgeVectors(std::vector<vec2Equation> edgeVectors);
         void Draw(Surface * screen);
 
     };

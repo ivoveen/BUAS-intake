@@ -82,10 +82,6 @@ namespace Tmpl8
 		return oldDisplacement;
 	}
 
-	/* bool Ball::OutOfBounds(vec2 position) {
-		 return (position.x - r < 0 && position.y - r < 0 && position.x > ScreenWidth&& position.y > ScreenHeight);
-	 }*/
-
 	std::vector<GameObject*> Ball::CheckBoundingBoxCollison() {
 		std::vector<GameObject*> collidingBoundingBoxes;
 
