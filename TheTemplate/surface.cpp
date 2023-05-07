@@ -536,10 +536,14 @@ void Sprite::DrawScaled( int a_X, int a_Y, int a_Width, int a_Height, Surface* a
 	if ((a_Width == 0) || (a_Height == 0)) return;
 	for ( int x = 0; x < a_Width; x++ ) for ( int y = 0; y < a_Height; y++ )
 	{
-		int u = (int)((float)x * ((float)m_Width / (float)a_Width));
-		int v = (int)((float)y * ((float)m_Height / (float)a_Height));
-		Pixel color = GetBuffer()[u + v * m_Pitch];
-		if (color & 0xffffff) a_Target->GetBuffer()[a_X + x + ((a_Y + y) * a_Target->GetPitch())] = color;
+		if (a_X + x < a_Target->GetWidth() && a_X > 0 && a_Y + y < a_Target->GetHeight() && a_Y > 0) {
+
+			int u = (int)((float)x * ((float)m_Width / (float)a_Width));
+			int v = (int)((float)y * ((float)m_Height / (float)a_Height));
+			Pixel color = GetBuffer()[u + v * m_Pitch];
+			if (color & 0xffffff) a_Target->GetBuffer()[a_X + x + ((a_Y + y) * a_Target->GetPitch())] = color;
+		}
+
 	}
 }
 

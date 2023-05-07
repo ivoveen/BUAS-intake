@@ -12,6 +12,11 @@ namespace Tmpl8 {
     private:
         struct Impact
         {
+            Impact() {
+                pointOfImpact = vec2(NULL, NULL);
+                circleCenter = vec2(NULL, NULL);
+                elapsedDeltaTime = NULL;
+            }
             Impact(vec2 pointOfImpact, vec2 circleCenter, float elapsedDeltaTime) {
                 this->pointOfImpact = pointOfImpact;
                 this->circleCenter = circleCenter;
@@ -31,11 +36,12 @@ namespace Tmpl8 {
         Ball(float x, float y, Surface* ballSprite, vec2 v);
         void Tick(float deltaTime, Surface* screen);
         void Move(float deltaTime, Surface* screen);
+        vec2 Ball::CalculateBounce(float xCircleCenter, float yCircleCenter,float deltaTime, vec2 displacemnt);
         std::vector<GameObject*> CheckBoundingBoxCollison();
-        Impact PointOfImpact(GameObject* obj, vec2 force);
+        Impact PointOfImpact(float xCircleCenter, float yCircleCenter, GameObject* obj, vec2 force);
         vec2 ClosestPointOnSegment(vec2 p, vec2 a, vec2 b);
-        Impact CornerPointOfImpact(vec2 force, vec2 closestPoint);
-        Impact EdgePointOfImpact(vec2 force, vec2Equation closestEdgeVector);
+        Impact CornerPointOfImpact(float xCircleCenter, float yCircleCenter, vec2 force, vec2 closestPoint);
+        Impact EdgePointOfImpact(float xCircleCenter, float yCircleCenter, vec2 force, vec2Equation closestEdgeVector);
         void Draw(Surface* screen);
         BoundingBox GetBoundingBox();
     };

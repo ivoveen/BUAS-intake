@@ -27,7 +27,7 @@ namespace Tmpl8
                 highestX = (highestX == NULL || edgeVector.direction.x + edgeVector.position.x > highestX) ? edgeVector.direction.x + edgeVector.position.x : highestX;
                 highestY = (highestY == NULL || edgeVector.direction.y + edgeVector.position.y > highestY) ? edgeVector.direction.y + edgeVector.position.y : highestY;
             }
-            boundingBoxBuffer = 50;
+            boundingBoxBuffer = 100;
             myBoundingBox = BoundingBox(lowestX - boundingBoxBuffer, lowestY - boundingBoxBuffer, highestX + boundingBoxBuffer, highestY + boundingBoxBuffer);
         }
 
@@ -38,7 +38,7 @@ namespace Tmpl8
         void Obstacle::Draw(Surface* screen) {
             //screen->FBox(x1, y1, x2, y2, c1);
             for (const auto& edgeVector : edgeVectors) {
-                screen->Line(edgeVector.position.x, edgeVector.position.y, edgeVector.direction.x + edgeVector.position.x, edgeVector.direction.y + edgeVector.position.y, c1);
+                screen->FLine(edgeVector.position.x, edgeVector.position.y, edgeVector.direction.x + edgeVector.position.x, edgeVector.direction.y + edgeVector.position.y, c1);
             }
         }
 

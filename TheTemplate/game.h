@@ -23,6 +23,7 @@ public:
 private:
 	Surface* screen;
 	int mousex, mousey;
+	bool start;
 };
 
 }; // namespace Tmpl8
