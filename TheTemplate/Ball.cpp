@@ -5,6 +5,7 @@
 #include "Physics.h"
 #include "GameObject.h"
 #include <vector>
+#include <iostream>
 
 
 namespace Tmpl8
@@ -26,37 +27,10 @@ namespace Tmpl8
 	}
 
 	void Ball::Move(float deltaTime, Surface* screen) {
-		bool noBounce = true;
-		vec2 displacement = TotalDisplacement(x, y, 0.0001f, deltaTime);
-
-
-		vec2 bounce = CalculateBounce(x, y, deltaTime, displacement);
-		if (bounce != displacement + vec2(x, y) && bounce != vec2(NULL, NULL)) {
-			//there has been a bounce
-			x = bounce.x + x, y = bounce.y + y;
-			noBounce = false;
-		}
-
-		vec2 nextPos = displacement + vec2(x, y);
-		if (noBounce) {
-			x = nextPos.x, y = nextPos.y;
-		}
+		vec2 displacement = TotalPhysicsDisplacement(x, y, 0.0001f, deltaTime);
+		displacement = CalculateBounce(x, y, deltaTime, displacement);
+		x = displacement.x + x, y = displacement.y + y;
 	}
-
-	//void Ball::Move(float deltaTime, Surface* screen) {
-
-	//    vec2 displacement = TotalDisplacement(x, y, 0.0001f, deltaTime);
-	//    vec2 bounce = CalculateBounce(deltaTime, displacement);
-	//    if (bounce != displacement) {
-	//        //there has been a bounce
-	//        x = bounce.x + x, y = bounce.y + y;
-
-	//    }
-	//    else {
-	//        vec2 nextPos = displacement + vec2(x, y);
-	//        x = nextPos.x, y = nextPos.y;
-	//    }
-	//}
 
 	vec2 Ball::CalculateBounce(float xCircleCenter, float yCircleCenter, float totalDeltaTime, vec2 displacement) {
 		std::vector<GameObject*> collidingBoundingBoxes = CheckBoundingBoxCollison();
@@ -68,17 +42,26 @@ namespace Tmpl8
 			{
 				do {
 					impact = PointOfImpact(xCircleCenter, yCircleCenter, boundingBox, displacement);
-					if (impact.pointOfImpact != vec2(NULL, NULL) && impact.elapsedDeltaTime != NULL) {
+
+					if (impact.circleCenter == vec2(xCircleCenter, yCircleCenter)) {
+						//the ball is laying still
+						displacement = vec2(0, 0);
+						totalDeltaTime = 0;
+						NormalVelocity(impact.pointOfImpact, impact.circleCenter);
+					}
+					else if (impact.pointOfImpact != vec2(NULL, NULL) && impact.circleCenter != vec2(NULL, NULL) && impact.elapsedDeltaTime != NULL) {
+						//there was a bounce
 						displacement = Bounce(impact.pointOfImpact, impact.circleCenter, impact.elapsedDeltaTime, totalDeltaTime);
 						totalDeltaTime = impact.elapsedDeltaTime;
 						xCircleCenter = impact.circleCenter.x, yCircleCenter = impact.circleCenter.y;
 					}
-				} while (impact.pointOfImpact != vec2(NULL, NULL) && impact.elapsedDeltaTime != NULL);
+				} while (impact.pointOfImpact != vec2(NULL, NULL) && impact.circleCenter != vec2(NULL, NULL) && impact.elapsedDeltaTime != NULL);
 
 			}
-		  //check if another bounce should happen with the same or another object
+			//check if another bounce should happen with the same or another object
 		} while (displacement != oldDisplacement);
-		
+
+		//when there is no bounce impact.circleCenter == NULL meaning the displacement still equals the normal physics displacement 
 		return oldDisplacement;
 	}
 
@@ -210,19 +193,23 @@ namespace Tmpl8
 		vec2 obstacleEdge = closestEdgeVector.direction;
 		vec2 edgePointOfImpact; //the point the actual hit takes place.
 
-		circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + obstacleEdge.clockwise().normalized() * r;
+		circleCollisionPoint = vec2(xCircleCenter, yCircleCenter) + obstacleEdge.clockwise().normalized() * r;// the point of impact before hit
 
 		//calculate the intersection between the line and the movement of the circleCollisionPoint.
 		nLine = (circleCollisionPoint.y * displacement.x + XLinePos * displacement.y - circleCollisionPoint.x * displacement.y - YLinePos * displacement.x) / (obstacleEdge.y * displacement.x - obstacleEdge.x * displacement.y);
 		nDisplacement = (YLinePos * obstacleEdge.x + circleCollisionPoint.x * obstacleEdge.y - XLinePos * obstacleEdge.y - circleCollisionPoint.y * obstacleEdge.x) / (displacement.y * obstacleEdge.x - displacement.x * obstacleEdge.y);
 		edgePointOfImpact = circleCollisionPoint + displacement * nDisplacement;
 
+
+
 		//check if this intersection is actually on the edge, and within reach of the velocity.
 		if (nDisplacement <= 1 && nDisplacement >= 0 && nLine <= 1 && nLine >= 0) {
 			vec2 impactCircleCenter = edgePointOfImpact + obstacleEdge.counterClockwise().normalized() * r;
+
 			return Impact(edgePointOfImpact, impactCircleCenter, nDisplacement);
 		}
 		else {
+
 			return Impact(vec2(NULL, NULL), vec2(NULL, NULL), NULL);
 		}
 	}
