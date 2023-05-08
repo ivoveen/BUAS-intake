@@ -17,27 +17,6 @@ namespace Tmpl8
 
    void Game::Init()
    {
-       
-
-
-       std::vector<vec2Equation> box;
-       box.push_back(vec2Equation(vec2(780, 0), vec2(-780, 0)));
-       box.push_back(vec2Equation(vec2(0, 0), vec2(0, 780)));
-       box.push_back(vec2Equation(vec2(0, 780), vec2(780, 0)));
-       box.push_back(vec2Equation(vec2(780, 780), vec2(0, -780)));
-
-       std::vector<vec2Equation> box2;
-       box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
-       box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
-       box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
-       box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
-
-       std::vector<vec2Equation> catcher;
-       catcher.push_back(vec2Equation(vec2(0, 0), vec2(800, 0)));
-
-
-
-
        std::vector<vec2Equation> tubeInnerWallS1;
        tubeInnerWallS1.push_back(vec2Equation(vec2(0, 0), vec2(35, 35)));
        tubeInnerWallS1.push_back(vec2Equation(vec2(35, 35), vec2(0, 600))); 
@@ -82,42 +61,77 @@ namespace Tmpl8
        topRightWall.push_back(vec2Equation(vec2(-100, -50), vec2(50, -150)));
        topRightWall.push_back(vec2Equation(vec2(-50, -200), vec2(-50, -25)));
        topRightWall.push_back(vec2Equation(vec2(-100, -225), vec2(-50, 150)));
-       topRightWall.push_back(vec2Equation(vec2(-150, -75), vec2(-100, -50)));
-       //bottomRightWall.push_back(vec2Equation(vec2(-173, 97), vec2(0, -50)));
-
-       std::vector<vec2Equation> leftFlipper;
-       leftFlipper.push_back(vec2Equation(vec2(0, 25), vec2(0, -25))); 
-       leftFlipper.push_back(vec2Equation(vec2(0, 0), vec2(150, 0)));
-       leftFlipper.push_back(vec2Equation(vec2(150, 0), vec2(0, 25)));
-       leftFlipper.push_back(vec2Equation(vec2(150, 25), vec2(-150, 0)));
+       topRightWall.push_back(vec2Equation(vec2(-150, -75), vec2(-67, -33)));
        
+       std::vector<vec2Equation> topWall;
+       topWall.push_back(vec2Equation(vec2(380, 0), vec2(-380, 0)));
+       topWall.push_back(vec2Equation(vec2(415, 35), vec2(-35, -35)));
+
+       std::vector<vec2Equation> topCenterWall;
+       topCenterWall.push_back(vec2Equation(vec2(-280, 160), vec2(280, -160)));
+       topCenterWall.push_back(vec2Equation(vec2(-230, 185), vec2(-50, -25)));
+       topCenterWall.push_back(vec2Equation(vec2(-230, 185), vec2(173, -99)));
+
+       std::vector<vec2Equation> topLeftWall;
+       topLeftWall.push_back(vec2Equation(vec2(50, 0), vec2(-50, 0)));
+       topLeftWall.push_back(vec2Equation(vec2(0, -80), vec2(50, 80)));
+       topLeftWall.push_back(vec2Equation(vec2(0, -170), vec2(0, 90)));
+       topLeftWall.push_back(vec2Equation(vec2(35, -205), vec2(-35, 35)));
+
+       std::vector<vec2Equation> leftCatcher;
+       leftCatcher.push_back(vec2Equation(vec2(0, 13), vec2(0, -113)));
+       leftCatcher.push_back(vec2Equation(vec2(0, -100), vec2(40, -80)));
+       leftCatcher.push_back(vec2Equation(vec2(40, -180), vec2(12, 6))); 
+       leftCatcher.push_back(vec2Equation(vec2(52, -174), vec2(-28, 86))); 
+       leftCatcher.push_back(vec2Equation(vec2(24, -88), vec2(0, 80)));
+       leftCatcher.push_back(vec2Equation(vec2(24, -8), vec2(120, 31)));
+       leftCatcher.push_back(vec2Equation(vec2(137, 49), vec2(-137,-36)));
+       leftCatcher.push_back(vec2Equation(vec2(144, 23), vec2(-6, 26)));
+
+       std::vector<vec2Equation> rightCatcher;
+       rightCatcher.push_back(vec2Equation(vec2(0, 13), vec2(-144, 35)));
+       rightCatcher.push_back(vec2Equation(vec2(-144, 48), vec2(-7, -25)));
+       rightCatcher.push_back(vec2Equation(vec2(-150, 22), vec2(117, -31)));
+       rightCatcher.push_back(vec2Equation(vec2(-32, -10), vec2(10, -170)));
+       rightCatcher.push_back(vec2Equation(vec2(-22, -180), vec2(12, 0)));
+       rightCatcher.push_back(vec2Equation(vec2(-10, -180), vec2(10, 193)));
+       
+       std::vector<vec2Equation> leftFlipper;
+       leftFlipper.push_back(vec2Equation(vec2(0, 0), vec2(150, 20))); 
+       leftFlipper.push_back(vec2Equation(vec2(150, 20), vec2(0, 6)));
+       leftFlipper.push_back(vec2Equation(vec2(150, 26), vec2(-150, 0)));
+       leftFlipper.push_back(vec2Equation(vec2(0, 26), vec2(0, -26)));
+
        std::vector<vec2Equation> rightFlipper;
-       rightFlipper.push_back(vec2Equation(vec2(0, 0), vec2(0, -25)));
-       rightFlipper.push_back(vec2Equation(vec2(0, -25), vec2(-150, 0)));
-       rightFlipper.push_back(vec2Equation(vec2(-150, -25), vec2(0, 25)));
-       rightFlipper.push_back(vec2Equation(vec2(-150, 0), vec2(150, 0)));
+       rightFlipper.push_back(vec2Equation(vec2(0, -26), vec2(0, 26)));
+       rightFlipper.push_back(vec2Equation(vec2(0, 0), vec2(-150, 0)));
+       rightFlipper.push_back(vec2Equation(vec2(-150, 0), vec2(0, -6)));
+       rightFlipper.push_back(vec2Equation(vec2(-150, -6), vec2(150, -20)));
 
 
-        myGameObjects.push_back(new Flipper(213, 650, 0xFF00FF, leftFlipper, VK_LEFT));
-        myGameObjects.push_back(new Flipper(523, 650, 0xFF00FF, rightFlipper, VK_RIGHT));
+        myGameObjects.push_back(new Flipper(213, 623, 0xFF00FF, leftFlipper, VK_LEFT));
+        myGameObjects.push_back(new Flipper(523, 623, 0xFF00FF, rightFlipper, VK_RIGHT));
         
-        myGameObjects.push_back(new Ball(760, 600, ballSprite, vec2(0.0f, -1.2f)));       
+        myGameObjects.push_back(new Ball(760, 600, ballSprite, vec2(0.0f, -1.2f)));    
+        myGameObjects.push_back(new Ball(300, 250, ballSprite, vec2(-0.0f, -0.8f)));
 
+        myGameObjects.push_back(new Obstacle(68, 600, 0xFFFFFF, leftCatcher));
+        myGameObjects.push_back(new Obstacle(674, 600, 0xFFFFFF, rightCatcher));
         myGameObjects.push_back(new Obstacle(708, 60, 0xFFFFFF, tubeInnerWallS1));
         myGameObjects.push_back(new Obstacle(108, 60, 0xFFFFFF, tubeInnerWallS2));
         myGameObjects.push_back(new Obstacle(108, 60, 0xFFFFFF, tubeInnerWallS3));
-
         myGameObjects.push_back(new Obstacle(758, 8, 0xFFFFFF, tubeOuterWallS1));
         myGameObjects.push_back(new Obstacle(43, 8, 0xFFFFFF, tubeOuterWallS2));
         myGameObjects.push_back(new Obstacle(43, 8, 0xFFFFFF, tubeOuterWallS3));
-
         myGameObjects.push_back(new Obstacle(58, 373, 0xFFFFFF, leftWall));
         myGameObjects.push_back(new Obstacle(8, 679, 0xFFFFFF, bottomLeftWall));
         myGameObjects.push_back(new Obstacle(734, 679, 0xFFFFFF, bottomRightWall));
         myGameObjects.push_back(new Obstacle(734, 679, 0xFFFFFF, rightWall));
         myGameObjects.push_back(new Obstacle(734, 329, 0xFFFFFF, topRightWall));
-        //myGameObjects.push_back(new Obstacle(578, 10, 0xFFFFFF, tubeOuterwallS1));
-
+        myGameObjects.push_back(new Obstacle(123, 305, 0xFFFFFF, topLeftWall));
+        myGameObjects.push_back(new Obstacle(158, 100, 0xFFFFFF, topWall));
+        myGameObjects.push_back(new Obstacle(573, 135, 0xFFFFFF, topCenterWall));
+        
         
 
        // myGameObjects.push_back(new Ball(200, 400, ballSprite, vec2(0, 0)));

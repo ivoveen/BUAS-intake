@@ -27,7 +27,7 @@ namespace Tmpl8
                 highestX = (highestX == NULL || edgeVector.direction.x + edgeVector.position.x > highestX) ? edgeVector.direction.x + edgeVector.position.x : highestX;
                 highestY = (highestY == NULL || edgeVector.direction.y + edgeVector.position.y > highestY) ? edgeVector.direction.y + edgeVector.position.y : highestY;
             }
-            boundingBoxBuffer = 100;
+            boundingBoxBuffer = 500;
             myBoundingBox = BoundingBox(lowestX - boundingBoxBuffer, lowestY - boundingBoxBuffer, highestX + boundingBoxBuffer, highestY + boundingBoxBuffer);
         }
 
