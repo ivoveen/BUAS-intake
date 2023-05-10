@@ -1,7 +1,7 @@
 #pragma once
 #include "template.h"
 
-constexpr float GRAVITY = 0.000981f;
+constexpr float GRAVITY = 0.000981f/2;
 constexpr float AIRRESISTANCE = 0.0001f;
 
 class Physics

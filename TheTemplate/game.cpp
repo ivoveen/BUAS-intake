@@ -1,24 +1,22 @@
 #include "game.h"
-#include "surface.h"
-#include <cstdio> //printf
-#include "template.h"
 #include "Ball.h"
 #include "Obstacle.h"
 #include "Flipper.h"
+#include "UI.h"
 #include <vector>
 #include <windows.h>
 constexpr auto PARTICLES = 4096u;
 using namespace Tmpl8;
 
 std::vector<GameObject*> Game::myGameObjects;
-Surface* ballSprite = new Surface("assets/ball.tga");
+
 
 void Game::Init()
 {	
-	
 	std::vector<vec2Equation> tubeInnerWallS1;
 	tubeInnerWallS1.push_back({ { 0, 0 }, {35, 35} });
-	tubeInnerWallS1.push_back({ {35, 35}, {0, 700} });
+	tubeInnerWallS1.push_back({ {35, 35}, {0, 705} });
+	tubeInnerWallS1.push_back({ {35, 555}, {50,0} });
 	std::vector<vec2Equation> tubeInnerWallS2;
 	tubeInnerWallS2.push_back({ { 0, 0 }, { 600, 0 } });
 	std::vector<vec2Equation> tubeInnerWallS3;
@@ -27,7 +25,7 @@ void Game::Init()
 	tubeInnerWallS3.push_back({ {15, 245}, {-50, -80} });
 	std::vector<vec2Equation> tubeOuterWallS1;
 	tubeOuterWallS1.push_back({ { 35, 35 }, { -35, -35 } });
-	tubeOuterWallS1.push_back({ {35, 635}, {0, -600} });
+	tubeOuterWallS1.push_back({ {35, 792}, {0, -757} });
 	std::vector<vec2Equation> tubeOuterWallS2;
 	tubeOuterWallS2.push_back({ {715, 0}, {-715, 0} });
 	std::vector<vec2Equation> tubeOuterWallS3;
@@ -80,28 +78,21 @@ void Game::Init()
 	rightCatcher.push_back({ {-22, -180}, {12, 0} });
 	rightCatcher.push_back({ {-10, -180}, {10, 193} });
 	std::vector<vec2Equation> leftFlipper;
-	leftFlipper.push_back({ {0, 0}, {150, 20} });
-	leftFlipper.push_back({ {150, 20}, {0, 6} });
-	leftFlipper.push_back({ {150, 26}, {-150, 0} });
+	leftFlipper.push_back({ {0, 0}, {120, 6} });
+	leftFlipper.push_back({ {120, 6}, {0, 20} });
+	leftFlipper.push_back({ {120, 26}, {-120, 0} });
 	leftFlipper.push_back({ {0, 26}, {0, -26} });
 	std::vector<vec2Equation> rightFlipper;
 	rightFlipper.push_back({ {0, -26}, {0, 26} });
-	rightFlipper.push_back({ {0, 0}, {-150, 0} });
-	rightFlipper.push_back({ { -150, 0 }, { 0, -6 } });
-	rightFlipper.push_back({ {-150, -6}, {150, -20} });
+	rightFlipper.push_back({ {0, 0}, {-120, 0} });
+	rightFlipper.push_back({ { -120, 0 }, { 0, -20 } });
+	rightFlipper.push_back({ {-120, -26}, {120, -6} });
 
-	theBall = new Ball(760, 600, ballSprite, vec2(-0.0f, -1.5f));
-
+	theUI = new UI();
+	theBall = new Ball(770, 600, vec2(-0.0f, -1.0f), theUI);
 
 	myGameObjects.push_back(new Flipper(213, 623, 0xFF00FF, leftFlipper, VK_LEFT, theBall));
 	myGameObjects.push_back(new Flipper(523, 623, 0xFF00FF, rightFlipper, VK_RIGHT, theBall));
-
-	//myGameObjects.push_back(new Ball(300, 400, ballSprite, Tmpl8::vec2(-0.0f, -0.0f)));
-
-	
-	//myGameObjects.push_back(new Ball(760, 600, ballSprite, Tmpl8::vec2(0.0f, -0.9f)));
-	//myGameObjects.push_back(new Ball(400, 630, ballSprite, vec2(-0.0f, -0.0f)));
-	
 	myGameObjects.push_back(new Obstacle(68, 600, 0xFFFFFF, leftCatcher));
 	myGameObjects.push_back(new Obstacle(674, 600, 0xFFFFFF, rightCatcher));
 	myGameObjects.push_back(new Obstacle(708, 60, 0xFFFFFF, tubeInnerWallS1));
@@ -118,6 +109,7 @@ void Game::Init()
 	myGameObjects.push_back(new Obstacle(123, 305, 0xFFFFFF, topLeftWall));
 	myGameObjects.push_back(new Obstacle(158, 100, 0xFFFFFF, topWall));
 	myGameObjects.push_back(new Obstacle(573, 135, 0xFFFFFF, topCenterWall));
+	
 	
 /*
 std::vector<vec2Equation> box2;
@@ -145,15 +137,15 @@ void Game::Tick(float deltaTime)
 {
 
 	//screen->Clear(0);
-	if (GetAsyncKeyState(VK_UP)) start = true;
+	if (GetAsyncKeyState(VK_SPACE)) start = true;
 	if (start) {
 		tickCounter++;
 
-		theBall->Tick(deltaTime/2);
+		theBall->Tick(deltaTime);
 
 		if (tickCounter % 2 == 0) {
 			for (const auto& obj : myGameObjects) {
-				obj->Tick(deltaTime/2);
+				obj->Tick(deltaTime);
 			}
 		}
 	
@@ -165,6 +157,7 @@ void Game::Tick(float deltaTime)
 			for (const auto& obj : myGameObjects) {
 				obj->Draw(screen);
 				theBall->Draw(screen);
+				theUI->Draw(screen);
 			}
 			
 		}

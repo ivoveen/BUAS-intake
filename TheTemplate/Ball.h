@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Physics.h"
 #include "surface.h"
+#include "UI.h"
 
 
 class Ball :
@@ -9,14 +10,15 @@ class Ball :
 	public GameObject
 {
 private:
-	
-
-	Tmpl8::Surface* sprite;
+	UI* theUI;
 	Tmpl8::Sprite ballSprite;
-	float b, mass;
-	Tmpl8::Pixel c1, c2;
-	bool stop;
+	float startX, startY;
+	Tmpl8::Pixel c1;
+	bool launched;
+	Tmpl8::vec2 startingVelocity;
 public:
+	float x, y, r;
+
 	struct Impact
 	{
 		Impact() {
@@ -40,10 +42,10 @@ public:
 		Tmpl8::vec2 normalOfImpactLine;
 		bool noImpact;
 	};
-
-	float x, y, r;
-	Ball(float x, float y, Tmpl8::Surface* ballSprite, Tmpl8::vec2 v);
+	
+	Ball(float x, float y, Tmpl8::vec2 v, UI* theUI);
 	void Tick(float deltaTime);
+	void OffScreen();
 	void Move(float deltaTime);
 	Tmpl8::vec2 Ball::CalculateBounce(float xCircleCenter, float yCircleCenter, float deltaTime, Tmpl8::vec2 displacemnt);
 	std::vector<GameObject*> CheckBoundingBoxCollison();

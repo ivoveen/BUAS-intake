@@ -98,7 +98,7 @@ float Flipper::GotHit(vec2 pointOfImpact) {
 	//closer to the middle == more boost
 	if (flipperKey == VK_RIGHT) nLine = abs(nLine - 1);
 	if (totalRotation != maxRotation && totalRotation != standardRotation) {
-		return 0.2f + nLine * 0.04f;
+		return 0.3f; // + nLine * 0.04f;
 	}
 	else {
 		return 0;

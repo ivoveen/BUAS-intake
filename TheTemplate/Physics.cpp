@@ -61,10 +61,10 @@ vec2 Physics::Bounce(vec2 normal, float elapsedDeltaTime, float totalDeltaTime, 
 	std::cout << "n: " << n.toString() << " d: " << d.toString() << " r: " << r.toString() << "\n";
 	if (velocityPercentage == NULL) velocityPercentage = 0;
 
-	//r += r.normalized() * velocityPercentage;
-	v = Resistance(r, 0.010f, (totalDeltaTime - elapsedDeltaTime));
-	v = r;
-	vec2 bounceDisplacement = v * (totalDeltaTime - elapsedDeltaTime) + v.normalized() * velocityPercentage;
+	r += r.normalized() * velocityPercentage;
+	v = Resistance(r, 0.001f, (totalDeltaTime - elapsedDeltaTime));
+	//v = r;
+	vec2 bounceDisplacement = v * (totalDeltaTime - elapsedDeltaTime) + v.normalized() * velocityPercentage * (totalDeltaTime - elapsedDeltaTime);
 	std::cout << (totalDeltaTime - elapsedDeltaTime) << ": DELTA TIME ||" << bounceDisplacement.toString() << " BOUNCE DISPLACE \n";
 	return bounceDisplacement;
 }

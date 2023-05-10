@@ -2,24 +2,46 @@
 #include "template.h"
 #include "Game.h"
 #include "surface.h"
-#include "Physics.h"
-#include "GameObject.h"
-#include <vector>
-#include <iostream>
+#include "Physics.h" // parent
+#include "GameObject.h" // parent
+#include <vector> // for vectors
+#include <iostream> // for debug
+#include <windows.h> // needed for keyboard
 using namespace Tmpl8;
 
-Ball::Ball(float x, float y, Surface* sprite, vec2 v) : ballSprite(sprite, 1) {
-	this->x = x;
-	this->y = y;
-	this->v = v;
-	this->sprite = sprite;
+Ball::Ball(float x, float y, vec2 v, UI* theUI) : ballSprite( Sprite(new Surface("assets/ball.tga"), 1) ) {
+	this->startX = x;
+	this->startY = y;
+	this->startingVelocity = v;
+	this->theUI = theUI;
 	r = 15.0f;
-	stop = false;
+	launched = false;
 
 }
 
 void Ball::Tick(float deltaTime) {
-	Move(deltaTime);
+	if (launched) {
+		if (x < ScreenWidth && x > 0 && y < ScreenHeight && y > 0) Move(deltaTime);
+		else {
+			launched = false;
+			theUI->UpdateLife();
+		}
+	}
+	else {
+		x = startX, y = startY;
+		if (GetAsyncKeyState(VK_UP))
+		{
+			launched = true;
+			v = startingVelocity;
+		}
+	}
+}
+
+void Ball::OffScreen() {
+	x = startX, y = startY;
+	v = vec2(0, 0);
+	launched = false;
+
 }
 
 void Ball::Move(float deltaTime) {
