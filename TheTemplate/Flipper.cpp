@@ -6,10 +6,11 @@
 #include <iostream>
 using namespace Tmpl8;
 
-Flipper::Flipper(float x, float y, Pixel c1, std::vector<vec2Equation>& edgeVectors, int flipperKey, Ball* theBall) :
+Flipper::Flipper(float x, float y, Pixel c1, std::vector<vec2Equation>& edgeVectors, int flipperKey, Ball* theBall, UI* theUI) :
 	Obstacle(x, y, c1, edgeVectors)
 {
 	this->theBall = theBall;
+	this->theUI = theUI;
 	this->flipperKey = flipperKey;
 	maxRotation = (flipperKey == VK_LEFT) ? -0.25f * PI : 0.25f * PI; //rotatian (in radians) in the direction corresponding to which side the flipper is on.
 	standardRotation = (flipperKey == VK_LEFT) ? 0.0625f * PI : -0.0625f * PI;
@@ -77,7 +78,7 @@ void Flipper::Move(float deltaTime) {
 	rotationAdjustment = totalRotation - oldRotation;
 	vec2 positionVec2 = vec2(x, y);
 	for (auto& edgeVector : edgeVectors) {
-		edgeVector.direction = vec2(edgeVector.direction.x * (float)cos(rotationAdjustment) - edgeVector.direction.y * (float)sin(rotationAdjustment), edgeVector.direction.x * (float)sin(rotationAdjustment) + edgeVector.direction.y * (float)cos(rotationAdjustment));
+		edgeVector.direction = vec2(edgeVector.direction.x * static_cast<float>(cos(rotationAdjustment)) - edgeVector.direction.y * static_cast<float>(sin(rotationAdjustment)), edgeVector.direction.x * static_cast<float>(sin(rotationAdjustment)) + edgeVector.direction.y * static_cast<float>(cos(rotationAdjustment)));
 		edgeVector.position = positionVec2;
 		positionVec2 += edgeVector.direction;
 	}
@@ -85,8 +86,10 @@ void Flipper::Move(float deltaTime) {
 }
 
 float Flipper::GotHit() {
+	theUI->UpdateScore(1);
+
 	if (totalRotation != maxRotation && totalRotation != standardRotation) {
-		return 0.1f; 
+		return 0.15f; 
 	}
 	else {
 		return 0;

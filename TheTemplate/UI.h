@@ -5,12 +5,13 @@
 class UI
 {
 private:
-	int lives;
-	int xLives, yLives;
+	int lives, score;
+	int xLives, yLives, xScore, yScore;
 	bool startUp, drawGameOver;
 	Tmpl8::Sprite livesSprite;
 	Tmpl8::Sprite mainMenu;
 	Tmpl8::Sprite gameOver;
+	Tmpl8::Sprite ScoreNumbers;
 
 public:
 	UI(); 
@@ -19,6 +20,7 @@ public:
 	bool DrawUI(Tmpl8::Surface* screen);
 	void DrawGameOver(Tmpl8::Surface* screen);
 	void UpdateLife();
+	void UpdateScore(int scoreIncrease);
 
 };
 

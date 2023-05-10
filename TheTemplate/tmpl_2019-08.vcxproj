@@ -230,6 +230,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="ScoreGoal.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="ScoreGoal.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="UI.h" />

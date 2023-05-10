@@ -96,7 +96,7 @@ void Surface::Centre( char* a_String, int y1, Pixel color )
 	Print( a_String, x, y1, color );
 }
 
-void Surface::Print( char* a_String, int x1, int y1, Pixel color )
+void Surface::Print( const char* a_String, int x1, int y1, Pixel color )
 {
 	if (!fontInitialized) 
 	{
@@ -282,24 +282,6 @@ void Surface::FCircle(float xCentre, float yCentre, float radius, float borderWi
 }
 
 
-
-
-void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
-{
-	Line( (float)x1, (float)y1, (float)x2, (float)y1, c );
-	Line( (float)x2, (float)y1, (float)x2, (float)y2, c );
-	Line( (float)x1, (float)y2, (float)x2, (float)y2, c );
-	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );
-}
-
-
-void Surface::FBox(float x1, float y1, float x2, float y2, Pixel c)
-{
-	FLine((float)x1, (float)y1, (float)x2, (float)y1, c);
-	FLine((float)x2, (float)y1, (float)x2, (float)y2, c);
-	FLine((float)x1, (float)y2, (float)x2, (float)y2, c);
-	FLine((float)x1, (float)y1, (float)x1, (float)y2, c);
-}
 
 
 void Surface::Bar( int x1, int y1, int x2, int y2, Pixel c )

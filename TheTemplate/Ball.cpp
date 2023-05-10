@@ -183,6 +183,7 @@ Ball::Impact Ball::CornerPointOfImpact(float xCircleCenter, float yCircleCenter,
 	// d(t) = r
 	// substitute x(t) and y(t) and solve for t
 	// to solve this equation I used chatGPT4 to save time
+	//std::cout << "corner????????????? \n";
 	float a = powf(displacement.x, 2) + powf(displacement.y, 2);
 	float b = 2 * (xCircleCenter * displacement.x - corner.x * displacement.x + yCircleCenter * displacement.y - corner.y * displacement.y);
 	float c = powf(xCircleCenter, 2) - 2 * xCircleCenter * corner.x + powf(corner.x, 2) + powf(yCircleCenter, 2) - 2 * yCircleCenter * corner.y + powf(corner.y, 2) - powf(r, 2);
@@ -208,6 +209,7 @@ Ball::Impact Ball::CornerPointOfImpact(float xCircleCenter, float yCircleCenter,
 
 	//check if the collision point on the line is within reach of the totalVelocity of the ball.
 	if (dT <= 1 && dT >= -epsilon) {
+		std::cout << "THIS IS CORNER HIT \n";
 		return Impact(corner, impactCircleCenter, dT * deltaTime, impactCircleCenter - cornerPointOfImpact, false);
 	}
 	else {
@@ -248,7 +250,7 @@ Ball::Impact Ball::EdgePointOfImpact(float xCircleCenter, float yCircleCenter, v
 
 
 void Ball::Draw(Surface* screen) {
-	ballSprite.DrawScaled((int)(x - r), (int)(y - r), (int)(2 * r), (int)(2 * r), screen); //x-r,y-r : changes from ballCenter to top left corner.
+	ballSprite.DrawScaled(static_cast<int> (x - r), static_cast<int> (y - r), static_cast<int> (2 * r), static_cast<int> (2 * r), screen); //x-r,y-r : changes from ballCenter to top left corner.
 }
 
 

@@ -48,9 +48,9 @@ inline Pixel InterpolateBlend(Pixel a_Color1, Pixel a_Color2, float factor)
 	const signed int b1 = (a_Color1 & BlueMask);
 	const signed int b2 = (a_Color2 & BlueMask);
 
-	const unsigned int r = (int)(r1 + factor * (r2 - r1)) <<16;
-	const unsigned int g = (int)(g1 + factor * (g2 - g1)) <<8;
-	const unsigned int b = (int)(b1 + factor * (b2 - b1));
+	const unsigned int r = static_cast<int>(r1 + factor * (r2 - r1)) <<16;
+	const unsigned int g = static_cast<int>(g1 + factor * (g2 - g1)) <<8;
+	const unsigned int b = static_cast<int>(b1 + factor * (b2 - b1));
 
 
 	return (r + g + b);
@@ -76,7 +76,7 @@ public:
 	void InitCharset();
 	void SetChar( int c, char* c1, char* c2, char* c3, char* c4, char* c5 );
 	void Centre( char* a_String, int y1, Pixel color );
-	void Print( char* a_String, int x1, int y1, Pixel color );
+	void Print( const char* a_String, int x1, int y1, Pixel color );
 	void Clear( Pixel a_Color );
 	void Line( float x1, float y1, float x2, float y2, Pixel color );
 	void FLine(float x1, float y1, float x2, float y2, Pixel color);
@@ -88,7 +88,7 @@ public:
 	void CopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void BlendCopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void ScaleColor( unsigned int a_Scale );
-	void Box( int x1, int y1, int x2, int y2, Pixel color );
+	void Box( float x1, float y1, float x2, float y2, Pixel color );
 	void FBox(float x1, float y1, float x2, float y2, Pixel color);
 	void Bar( int x1, int y1, int x2, int y2, Pixel color );
 	void Resize( Surface* a_Orig );

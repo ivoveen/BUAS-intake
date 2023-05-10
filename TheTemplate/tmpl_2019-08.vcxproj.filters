@@ -28,6 +28,9 @@
     <ClCompile Include="UI.cpp">
       <Filter>CPP files</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreGoal.cpp">
+      <Filter>CPP files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -55,6 +58,9 @@
       <Filter>header files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
+      <Filter>header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreGoal.h">
       <Filter>header files</Filter>
     </ClInclude>
   </ItemGroup>

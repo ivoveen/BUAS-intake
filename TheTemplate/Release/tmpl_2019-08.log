@@ -1,5 +1,3 @@
 ﻿  UI.cpp
-X:\BUAS-intake\TheTemplate\UI.cpp(15,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-X:\BUAS-intake\TheTemplate\UI.cpp(15,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
      Creating library X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64.lib and object X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64.exp
   tmpl_2019-08.vcxproj -> X:\BUAS-intake\TheTemplate\tmpl_2019-08_x64.exe

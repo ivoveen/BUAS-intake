@@ -3,6 +3,7 @@
 #include "Obstacle.h"
 #include "Flipper.h"
 #include "UI.h"
+#include "ScoreGoal.h"
 #include <vector>
 #include <windows.h>
 constexpr auto PARTICLES = 4096u;
@@ -46,21 +47,36 @@ void Game::Init()
 	std::vector<vec2Equation> topRightWall;
 	topRightWall.push_back({ {0, 0}, {-100, -50} });
 	topRightWall.push_back({ {-100, -50},{50, -150} });
-	topRightWall.push_back({ {-50, -200}, {-50, -25} });
+	//topRightWall.push_back({ {-50, -200}, {-50, -25} });
 	topRightWall.push_back({ {-100, -225}, {-50, 150} });
 	topRightWall.push_back({ {-150, -75}, {-67, -33} });
+	std::vector<vec2Equation> topRightWallScoreGoal;
+	topRightWallScoreGoal.push_back({ {-50, -200}, {-50, -25} });
 	std::vector<vec2Equation> topWall;
 	topWall.push_back({ {380, 0}, {-380, 0} });
-	topWall.push_back({ {415, 35}, {-35, -35} });
+	//topWall.push_back({ {415, 35}, {-35, -35} });
+	std::vector<vec2Equation> topWallScoreGoal;
+	topWallScoreGoal.push_back({ {415, 35}, {-35, -35} });
 	std::vector<vec2Equation> topCenterWall;
-	topCenterWall.push_back({ {-280, 160}, {280, -160} });
+	topCenterWall.push_back({ {-280, 160}, {93, -53} });
+	topCenterWall.push_back({ {-93, 53}, {93, -53} });
 	topCenterWall.push_back({ {-230, 185}, {-50, -25} });
-	topCenterWall.push_back({ {-57, 86}, {-173, 99} });
+	topCenterWall.push_back({ {-57, 86}, {-57, 33} });
+	topCenterWall.push_back({ {-171, 152}, {-57, 33} });
+
+	std::vector<vec2Equation> topCenterWallScoreGoalTop;
+	topCenterWallScoreGoalTop.push_back({ {-187, 107}, {94, -54} });
+
+	std::vector<vec2Equation> topCenterWallScoreGoalBottom;
+	topCenterWallScoreGoalBottom.push_back({ {-114, 119}, {-57, 33} });
+
+
 	std::vector<vec2Equation> topLeftWall;
 	topLeftWall.push_back({ {50, 0}, {-50, 0} });
 	topLeftWall.push_back({ {0, -80}, {50, 80} });
-	topLeftWall.push_back({ {0, -170}, {0, 90 } });
 	topLeftWall.push_back({ {35, -205}, {-35, 35} });
+	std::vector<vec2Equation> topLeftWallScoreGoal;
+	topLeftWallScoreGoal.push_back({ {0, -170}, {0, 90 } });
 	std::vector<vec2Equation> leftCatcher;
 	leftCatcher.push_back({ {0, 13}, {0, -113} });
 	leftCatcher.push_back({ {0, -100}, {40, -80} });
@@ -77,6 +93,11 @@ void Game::Init()
 	rightCatcher.push_back({ {-32, -10}, {10, -170} });
 	rightCatcher.push_back({ {-22, -180}, {12, 0} });
 	rightCatcher.push_back({ {-10, -180}, {10, 193} });
+	std::vector<vec2Equation> scoreGoal1;
+	scoreGoal1.push_back({ {0, 0}, {100, 0} });
+	scoreGoal1.push_back({ {100, 0}, {0, 25} });
+	scoreGoal1.push_back({ {100, 25}, {-100, 0} });
+	scoreGoal1.push_back({ {0, 25}, {0, -25} });
 	std::vector<vec2Equation> leftFlipper;
 	leftFlipper.push_back({ {0, 0}, {120, 6} });
 	leftFlipper.push_back({ {120, 6}, {0, 20} });
@@ -90,9 +111,14 @@ void Game::Init()
 
 	theUI = new UI();
 	theBall = new Ball(770, 600, vec2(-0.0f, -1.0f), theUI);
-
-	myGameObjects.push_back(new Flipper(213, 623, 0xFF00FF, leftFlipper, VK_LEFT, theBall));
-	myGameObjects.push_back(new Flipper(523, 623, 0xFF00FF, rightFlipper, VK_RIGHT, theBall));
+	//myGameObjects.push_back(new ScoreGoal(300, 550, 0x00FF00, scoreGoal1, 1, theUI));
+	myGameObjects.push_back(new ScoreGoal(734, 329, 0x00FF00, topRightWallScoreGoal, 20, theUI)); 
+	myGameObjects.push_back(new ScoreGoal(158, 100, 0x00FF00, topWallScoreGoal, 7, theUI));
+	myGameObjects.push_back(new ScoreGoal(123, 305, 0x00FF00, topLeftWallScoreGoal, 8, theUI)); 
+	myGameObjects.push_back(new ScoreGoal(573, 135, 0x00FF00, topCenterWallScoreGoalTop, 9, theUI)); 
+	myGameObjects.push_back(new ScoreGoal(573, 135, 0x00FF00, topCenterWallScoreGoalBottom, 8, theUI));
+	myGameObjects.push_back(new Flipper(213, 623, 0xFF00FF, leftFlipper, VK_LEFT, theBall, theUI));
+	myGameObjects.push_back(new Flipper(523, 623, 0xFF00FF, rightFlipper, VK_RIGHT, theBall, theUI));
 	myGameObjects.push_back(new Obstacle(68, 600, 0xFFFFFF, leftCatcher));
 	myGameObjects.push_back(new Obstacle(674, 600, 0xFFFFFF, rightCatcher));
 	myGameObjects.push_back(new Obstacle(708, 60, 0xFFFFFF, tubeInnerWallS1));
@@ -110,23 +136,8 @@ void Game::Init()
 	myGameObjects.push_back(new Obstacle(158, 100, 0xFFFFFF, topWall));
 	myGameObjects.push_back(new Obstacle(573, 135, 0xFFFFFF, topCenterWall));
 
-
-	/*
-	std::vector<vec2Equation> box2;
-	box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
-	box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
-	box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
-	box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
-
-	myGameObjects.push_back(new Ball(300, 635, ballSprite, vec2(-0.0f, -0.0f)));
-
-	myGameObjects.push_back(new Obstacle(320, 650, 0xFFFFFF, box2));
-	myGameObjects.push_back(new Obstacle(0, 650, 0xFFFFFF, box2));
-
-	//myGameObjects.push_back(new Ball(200, 400, ballSprite, vec2(0, 0)));
-	//myGameObjects.push_back(new Ball(400, 800, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.6f)));
-	//myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f))); */
 	start = false;
+	gameOver = true;
 }
 
 void Game::Shutdown() {
@@ -135,12 +146,9 @@ void Game::Shutdown() {
 
 void Game::Tick(float deltaTime)
 {
-	if (GetAsyncKeyState(VK_TAB)) {
-		start = false;
-	}
 
 	//screen->Clear(0);
-	if (GetAsyncKeyState(VK_SPACE)) {
+	if (GetAsyncKeyState(VK_SPACE) && gameOver) {
 		start = true;
 		gameOver = false;
 		theUI->Init();
