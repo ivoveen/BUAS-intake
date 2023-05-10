@@ -11,6 +11,9 @@
 #include <cstdlib>
 #include <cstdio>
 
+//a library for strings
+#include <sstream>
+
 constexpr int ScreenWidth = 800;
 constexpr int ScreenHeight = 800;
  //#define FULLSCREEN
@@ -100,11 +103,13 @@ public:
 	static vec2 normalize( vec2 v ) { return v.normalized(); }
 	float dot( const vec2& operand ) const { return x * operand.x + y * operand.y; }
 	//my own methods
+	std::string toString() { return (" ( " + std::to_string(x) + " , " + std::to_string(y) + " ) "); }
 	vec2 clockwise() { return vec2(-y, x); }
 	vec2 counterClockwise() { return vec2(y, -x); }
+	float distance(vec2 operand) { return sqrtf(powf(x - operand.x, 2) + powf(y - operand.y, 2)); }
 	bool operator == (vec2 operand) { if (x == operand.x && y == operand.y) { return true; } else { return false; } }
 	bool operator != (vec2 operand) { if (x != operand.x || y != operand.y) { return true; } else { return false; } }
-
+	vec2 operator / (float operand) const { return vec2(x / operand, y / operand); }
 };
 
 

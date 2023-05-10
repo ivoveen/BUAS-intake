@@ -1,24 +1,26 @@
 #pragma once
 #include "Obstacle.h"
+#include "Ball.h"
 
-namespace Tmpl8
+class Flipper :
+	public Obstacle
 {
-    class Flipper :
-        public Obstacle
-    {
-    private:
+private:
+	int flipperKey;
+	float factor, totalRotation;
+	float maxRotation, standardRotation, rotationSpeed, maxBoost;
+	Tmpl8::Pixel c1;
+	Ball* theBall;
+public:
+	
 
-    public:
-        int flipperKey;
-        float factor, totalRotation;
-        float maxRotation, standardRotation, rotationSpeed;
-        Pixel c1;
+	Flipper(float x, float y, Tmpl8::Pixel c1, std::vector<vec2Equation>& edgeVectors, int flipperKey, Ball* theBall);
+	//Flipper(float x, float y);
+	void Tick(float deltaTime);
+	void CheckForBallCollision(float deltaTime);
+	void Move(float deltaTime);
+	float GotHit(Tmpl8::vec2 pointOfImpact);
+};
 
-        Flipper(float x, float y, Pixel c1, std::vector<vec2Equation>& edgeVectors, int flipperKey);
-        //Flipper(float x, float y);
-        void Tick(float deltaTime, Surface* screen);
-        void Move(float deltaTime);
-    };
 
-}
 

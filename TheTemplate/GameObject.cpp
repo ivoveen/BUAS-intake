@@ -2,16 +2,13 @@
 #include "surface.h"
 
 
-namespace Tmpl8
-{
 
-	void GameObject::Tick(float deltaTime, Surface* screen) {
-
-	}
-
-	BoundingBox GameObject::GetBoundingBox() {
-		return BoundingBox(0, 0, 0, 0);;
-	}
+void GameObject::Tick(float deltaTime) {
 
 }
+
+BoundingBox GameObject::GetBoundingBox() {
+	return BoundingBox(0, 0, 0, 0);;
+}
+
 
