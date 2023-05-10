@@ -9,18 +9,20 @@ namespace Tmpl8 {
 	{
 	public:
 	    static std::vector<GameObject*> myGameObjects;
-		Ball* theBall;
-		UI* theUI;
-
+		
+		
+		
 		void SetTarget(Tmpl8::Surface* surface) { screen = surface; }
 		void Init();
 		void Shutdown();
 		void Tick(float deltaTime);
 	private:
-
+		bool start, gameOver;
 		Tmpl8::Surface* screen;
 		int mousex, mousey;
 		unsigned int tickCounter = 0;
-		bool start;
+		Ball* theBall;
+		UI* theUI;
+		
 	};
 }

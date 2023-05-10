@@ -12,7 +12,7 @@ std::vector<GameObject*> Game::myGameObjects;
 
 
 void Game::Init()
-{	
+{
 	std::vector<vec2Equation> tubeInnerWallS1;
 	tubeInnerWallS1.push_back({ { 0, 0 }, {35, 35} });
 	tubeInnerWallS1.push_back({ {35, 35}, {0, 705} });
@@ -109,23 +109,23 @@ void Game::Init()
 	myGameObjects.push_back(new Obstacle(123, 305, 0xFFFFFF, topLeftWall));
 	myGameObjects.push_back(new Obstacle(158, 100, 0xFFFFFF, topWall));
 	myGameObjects.push_back(new Obstacle(573, 135, 0xFFFFFF, topCenterWall));
-	
-	
-/*
-std::vector<vec2Equation> box2;
-box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
-box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
-box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
-box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
 
-myGameObjects.push_back(new Ball(300, 635, ballSprite, vec2(-0.0f, -0.0f)));
 
-myGameObjects.push_back(new Obstacle(320, 650, 0xFFFFFF, box2));
-myGameObjects.push_back(new Obstacle(0, 650, 0xFFFFFF, box2));
+	/*
+	std::vector<vec2Equation> box2;
+	box2.push_back(vec2Equation(vec2(0, 0), vec2(300, 0)));
+	box2.push_back(vec2Equation(vec2(300, 0), vec2(0, 110)));
+	box2.push_back(vec2Equation(vec2(300, 110), vec2(-300, 0)));
+	box2.push_back(vec2Equation(vec2(0, 110), vec2(0, -110)));
 
-//myGameObjects.push_back(new Ball(200, 400, ballSprite, vec2(0, 0)));
-//myGameObjects.push_back(new Ball(400, 800, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.6f)));
-//myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f))); */
+	myGameObjects.push_back(new Ball(300, 635, ballSprite, vec2(-0.0f, -0.0f)));
+
+	myGameObjects.push_back(new Obstacle(320, 650, 0xFFFFFF, box2));
+	myGameObjects.push_back(new Obstacle(0, 650, 0xFFFFFF, box2));
+
+	//myGameObjects.push_back(new Ball(200, 400, ballSprite, vec2(0, 0)));
+	//myGameObjects.push_back(new Ball(400, 800, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, -0.6f)));
+	//myGameObjects.push_back(new Ball(500, 300, 20, 2, 100, 0xFFFFFF, 0x00FFF0, vec2(0.2f, 0.3f))); */
 	start = false;
 }
 
@@ -135,34 +135,47 @@ void Game::Shutdown() {
 
 void Game::Tick(float deltaTime)
 {
+	if (GetAsyncKeyState(VK_TAB)) {
+		start = false;
+	}
 
 	//screen->Clear(0);
-	if (GetAsyncKeyState(VK_SPACE)) start = true;
+	if (GetAsyncKeyState(VK_SPACE)) {
+		start = true;
+		gameOver = false;
+		theUI->Init();
+	}
 	if (start) {
 		tickCounter++;
 
-		theBall->Tick(deltaTime);
+		
+		if (!gameOver) {
+			theBall->Tick(deltaTime);
 
-		if (tickCounter % 2 == 0) {
-			for (const auto& obj : myGameObjects) {
-				obj->Tick(deltaTime);
+			if (tickCounter % 2 == 0) {
+				for (const auto& obj : myGameObjects) {
+					obj->Tick(deltaTime);
+				}
 			}
 		}
-	
 
-		
+
+
 		if (tickCounter == 9) {
 			tickCounter = 0;
 			screen->Clear(0);
 			for (const auto& obj : myGameObjects) {
 				obj->Draw(screen);
 				theBall->Draw(screen);
-				theUI->Draw(screen);
+				if (gameOver) theUI->DrawGameOver(screen);
+				else gameOver = theUI->DrawUI(screen);
 			}
-			
+
 		}
-
-
 	}
+	else {
+		theUI->DrawMenu(screen);
+	}
+
 }
 

@@ -19,7 +19,7 @@ public:
 	void Tick(float deltaTime);
 	void CheckForBallCollision(float deltaTime);
 	void Move(float deltaTime);
-	float GotHit(Tmpl8::vec2 pointOfImpact);
+	float GotHit();
 };
 
 

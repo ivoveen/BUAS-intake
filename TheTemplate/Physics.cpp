@@ -6,11 +6,13 @@
 using namespace Tmpl8;
 
 Physics::Physics() {
-	normalVelocity = 0;
-	v = 0;
-
+	Init();
 }
 
+void Physics::Init() {
+	normalVelocity = 0;
+	v = 0;
+}
 
 vec2 Physics::Gravity(float x, float y, float deltaTime) {
 	vec2 gravityDisplacement = vec2(0, 0);

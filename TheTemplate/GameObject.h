@@ -34,7 +34,7 @@ public:
 		std::vector<vec2Equation> emptyVector;
 		return emptyVector;
 	}
-	virtual float GotHit(Tmpl8::vec2 pointOfImpact) { return NULL; };
+	virtual float GotHit() { return NULL; };
 	virtual void Draw(Tmpl8::Surface* screen) {};
 };
 

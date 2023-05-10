@@ -75,7 +75,7 @@ vec2 Ball::CalculateBounce(float xCircleCenter, float yCircleCenter, float total
 						lastNormal = impact.normalOfImpactLine;
 
 						//there was a bounce
-						displacement = Bounce(impact.normalOfImpactLine, impact.elapsedDeltaTime, totalDeltaTime, obj->GotHit(impact.pointOfImpact));
+						displacement = Bounce(impact.normalOfImpactLine, impact.elapsedDeltaTime, totalDeltaTime, obj->GotHit());
 						totalDeltaTime = impact.elapsedDeltaTime;
 						xCircleCenter = impact.circleCenter.x, yCircleCenter = impact.circleCenter.y;
 						std::cout << displacement.x << " , y: " << displacement.y << "teller buiten: " << tellerBuiten << "teller" << teller << " POI: " << impact.pointOfImpact.toString() << "LETS BOUNCE BOIII \n";

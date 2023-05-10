@@ -16,7 +16,6 @@ Flipper::Flipper(float x, float y, Pixel c1, std::vector<vec2Equation>& edgeVect
 	rotationSpeed = 0.016f;
 	factor = 0;
 	totalRotation = 0;
-	maxBoost = 1.5;
 
 }
 
@@ -50,7 +49,7 @@ void Flipper::CheckForBallCollision(float deltaTime) {
 		//std::cout << "distance: " << distance << "ball x:" << p.x << " , y: " << p.y << "| closestPoint x: " << closestPoint.x << ", y: " << closestPoint.y << "\n";
 		Ball::Impact impact = theBall->EdgePointOfImpact(theBall->x, theBall->y, theBall->TotalPhysicsDisplacement(theBall->x, theBall->y, deltaTime), closestEdgeVector, -1000, 0, deltaTime);
 		if (!impact.noImpact) {
-			vec2 newDisplacement = theBall->Bounce(impact.normalOfImpactLine, impact.elapsedDeltaTime, deltaTime, this->GotHit(impact.pointOfImpact));
+			vec2 newDisplacement = theBall->Bounce(impact.normalOfImpactLine, impact.elapsedDeltaTime, deltaTime, this->GotHit());
 			theBall->x += newDisplacement.x, theBall->y += newDisplacement.y;
 		}
 		else {
@@ -85,20 +84,9 @@ void Flipper::Move(float deltaTime) {
 	Flipper::SetEdgeVectors(edgeVectors);
 }
 
-float Flipper::GotHit(vec2 pointOfImpact) {
-	std::vector<vec2Equation> edgeVectors = this->GetEdgeVectors();
-	float nLine = 0;
-	//calculate which edge was hit
-	for (auto& edgeVector : edgeVectors) {
-		nLine = (pointOfImpact.x - edgeVector.position.x) / edgeVector.direction.x;
-		if (nLine > 0 && nLine < 1) {
-			break;
-		}
-	}
-	//closer to the middle == more boost
-	if (flipperKey == VK_RIGHT) nLine = abs(nLine - 1);
+float Flipper::GotHit() {
 	if (totalRotation != maxRotation && totalRotation != standardRotation) {
-		return 0.3f; // + nLine * 0.04f;
+		return 0.1f; 
 	}
 	else {
 		return 0;

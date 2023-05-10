@@ -10,6 +10,7 @@ public:
 	Tmpl8::vec2 v, normalVelocity;
 
 	Physics();
+	void Init();
 	Tmpl8::vec2 Gravity(float x, float y, float deltaTime);
 	Tmpl8::vec2 Resistance(Tmpl8::vec2 F, float resistance, float deltaTime);
 	Tmpl8::vec2 TotalPhysicsDisplacement(float x, float y,float deltaTime);
